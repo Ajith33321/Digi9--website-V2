@@ -2,15 +2,13 @@
 <?php include 'includes/header.php'; ?>
 
 <!-- ##### PAGE HEADER ##### -->
-<div class="page-header">
-  <div class="container">
-    <div class="reveal">
-      <div class="eyebrow">Expertise</div>
-      <h1 class="h1-mega">Next-Generation <span class="text-gradient">Web Applications</span></h1>
-      <p class="subtext">Scalable, secure, and AI-enabled web platforms built for complex business operations. We build technical systems, not just websites.</p>
-      <div class="page-header-line"></div>
+<div class="page-header section-alt" style="padding-top: 160px; padding-bottom: 80px; position:relative;">
+    <div class="light-shaft"></div>
+    <div class="container" style="display:flex; flex-direction:column; align-items:flex-start;">
+        <div class="reveal eyebrow">Expertise</div>
+        <h1 class="h1-mega reveal" data-depth="15">Web Application <span class="text-gradient">Development</span></h1>
+        <p class="subtext reveal">Custom web application development services in Bangalore for scalable business platforms, portals, and dashboards.</p>
     </div>
-  </div>
 </div>
 
 <!-- ##### SERVICE DETAIL ##### -->

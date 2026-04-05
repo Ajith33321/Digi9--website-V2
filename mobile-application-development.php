@@ -2,15 +2,13 @@
 <?php include 'includes/header.php'; ?>
 
 <!-- ##### PAGE HEADER ##### -->
-<div class="page-header">
-  <div class="container">
-    <div class="reveal">
-      <div class="eyebrow">Expertise</div>
-      <h1 class="h1-mega">High-Performance <span class="text-gradient">Mobile Apps</span> for Business</h1>
-      <p class="subtext">Custom AI-powered mobile applications for iOS and Android built specifically for operational efficiency and field usage.</p>
-      <div class="page-header-line"></div>
+<div class="page-header section-alt" style="padding-top: 160px; padding-bottom: 80px; position:relative;">
+    <div class="light-shaft"></div>
+    <div class="container" style="display:flex; flex-direction:column; align-items:flex-start;">
+        <div class="reveal eyebrow">Expertise</div>
+        <h1 class="h1-mega reveal" data-depth="15">Mobile Application <span class="text-gradient">Development</span></h1>
+        <p class="subtext reveal">Custom mobile app development services in Bangalore for internal enterprise systems and customer-facing platforms.</p>
     </div>
-  </div>
 </div>
 
 <!-- ##### SERVICE DETAIL ##### -->

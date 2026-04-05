@@ -2,15 +2,13 @@
 <?php include 'includes/header.php'; ?>
 
 <!-- ##### PAGE HEADER ##### -->
-<div class="page-header">
-  <div class="container">
-    <div class="reveal">
-      <div class="eyebrow">Expertise</div>
-      <h1 class="h1-mega">Custom <span class="text-gradient">Software Engineering</span> for Complex Workflows</h1>
-      <p class="subtext">We build tailormade software systems that match your internal business processes. No compromises, just software built for exactly how you work.</p>
-      <div class="page-header-line"></div>
+<div class="page-header section-alt" style="padding-top: 160px; padding-bottom: 80px; position:relative;">
+    <div class="light-shaft"></div>
+    <div class="container" style="display:flex; flex-direction:column; align-items:flex-start;">
+        <div class="reveal eyebrow">Expertise</div>
+        <h1 class="h1-mega reveal" data-depth="15">Custom <span class="text-gradient">Software</span> Development</h1>
+        <p class="subtext reveal">Building bespoke software systems designed specifically for your complex business workflows and enterprise operations.</p>
     </div>
-  </div>
 </div>
 
 <!-- ##### SERVICE DETAIL ##### -->
