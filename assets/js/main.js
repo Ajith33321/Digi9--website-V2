@@ -111,7 +111,7 @@
   if (!canvas) return;
 
   const ctx = canvas.getContext('2d');
-  const TOTAL_FRAMES = 30;
+  const TOTAL_FRAMES = 240;
   let frames = [];
   let imagesLoaded = 0;
   
@@ -127,9 +127,8 @@
   for (let i = 1; i <= TOTAL_FRAMES; i++) {
     const img = new Image();
     const frameNumber = i.toString().padStart(3, '0');
-    // Using dummy placeholder path. The instructions specifically asked us to handle the case where path might not exist yet.
-    // If you need actual assets, they go here.
-    img.src = `assets/mascot/frame_${frameNumber}.png`;
+    // Connecting the new 240 jpg sequence path
+    img.src = `assets/mascot/ezgif-frame-${frameNumber}.jpg`;
     img.onload = () => { imagesLoaded++; };
     // If error, generate a dummy frame so user can see logic working
     img.onerror = () => {
