@@ -7,7 +7,7 @@ require_once 'includes/header.php';
 <!-- SECTION 1: HERO -->
 <section class="hero">
     <div class="container">
-        <div class="grid-2" style="align-items:center;">
+        <div style="padding-top: 40px;">
             <div data-depth="20">
                 <div class="hero-fade eyebrow" style="margin-bottom:20px;">
                     ✦ &nbsp;AI-Powered Solutions &nbsp;·&nbsp; Bangalore, India
@@ -21,13 +21,6 @@ require_once 'includes/header.php';
                 <div class="hero-fade btn-group">
                     <a href="contact.php" class="btn-primary" id="hero-cta">Book a Consultation →</a>
                     <a href="services.php" class="btn-outline">Explore Services</a>
-                </div>
-            </div>
-            <div style="display:flex; justify-content:center;">
-                <!-- Glowing hero light behind the mascot -->
-                <div class="hero-glow"></div>
-                <div class="mascot-container" data-depth="-40">
-                    <canvas id="mascot-canvas"></canvas>
                 </div>
             </div>
         </div>
@@ -158,5 +151,11 @@ require_once 'includes/header.php';
         </div>
     </div>
 </section>
+
+<!-- Global Fixed Mascot Container -->
+<div class="mascot-container">
+    <div class="hero-glow"></div>
+    <canvas id="mascot-canvas"></canvas>
+</div>
 
 <?php require_once 'includes/footer.php'; ?>
