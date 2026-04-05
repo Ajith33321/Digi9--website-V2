@@ -19,7 +19,12 @@ if (!isset($metaDescription)) $metaDescription = "Digi9 is a custom AI software 
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%231E90FF' rx='20'/%3E%3Ctext x='50' y='65' fill='%23FFF' font-family='Arial' font-size='50' font-weight='bold' text-anchor='middle'%3ED9%3C/text%3E%3C/svg%3E">
 </head>
 <body>
-<canvas id="starfield"></canvas>
+<!-- Space Theme Parallax Base Layers -->
+<canvas id="starfield" data-depth="-300"></canvas>
+<div class="nebula-blob nebula-1" data-depth="-150"></div>
+<div class="nebula-blob nebula-2" data-depth="-150"></div>
+<div class="aurora-band aurora-1" data-depth="-80"></div>
+<div class="aurora-band aurora-2" data-depth="-80"></div>
 
 <nav id="navbar">
     <div class="container nav-inner">

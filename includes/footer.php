@@ -1,6 +1,7 @@
 </main>
 
-<footer>
+<footer style="margin-top:auto;">
+    <div class="light-shaft"></div>
     <div class="container">
         <div class="footer-grid">
             <!-- Brand -->

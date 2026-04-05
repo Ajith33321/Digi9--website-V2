@@ -8,7 +8,7 @@ require_once 'includes/header.php';
 <section class="hero">
     <div class="container">
         <div class="grid-2" style="align-items:center;">
-            <div>
+            <div data-depth="20">
                 <div class="hero-fade eyebrow" style="margin-bottom:20px;">
                     ✦ &nbsp;AI-Powered Solutions &nbsp;·&nbsp; Bangalore, India
                 </div>
@@ -19,15 +19,15 @@ require_once 'includes/header.php';
                     Digi9 is a custom AI software development company in India, building AI-powered applications, web platforms, and mobile apps designed around real business workflows.
                 </p>
                 <div class="hero-fade btn-group">
-                    <a href="contact.php" class="btn-primary">Book a Consultation →</a>
+                    <a href="contact.php" class="btn-primary" id="hero-cta">Book a Consultation →</a>
                     <a href="services.php" class="btn-outline">Explore Services</a>
                 </div>
             </div>
             <div style="display:flex; justify-content:center;">
-                <div class="orbital-container">
-                    <div class="orbital-ring"></div>
-                    <div class="orbital-ring-2"></div>
-                    <div class="planet-core"></div>
+                <!-- Glowing hero light behind the mascot -->
+                <div class="hero-glow"></div>
+                <div class="mascot-container" data-depth="-40">
+                    <canvas id="mascot-canvas"></canvas>
                 </div>
             </div>
         </div>
@@ -36,26 +36,27 @@ require_once 'includes/header.php';
 
 <!-- SECTION 2: SERVICE PILLARS -->
 <section class="section-alt">
+    <div class="light-shaft"></div>
     <div class="container">
         <div class="reveal eyebrow text-center">What We Do</div>
         <h2 class="reveal section-title text-center" style="margin:0 auto 64px;">Our Core Services</h2>
         <div class="grid-3">
             <a href="ai-software-development.php" style="text-decoration:none;">
-                <div class="card float-card reveal-card">
+                <div class="card float-card reveal-card" data-depth="5">
                     <div style="font-size:32px; margin-bottom:20px;">🤖</div>
                     <h3 class="card-title">AI Software Development</h3>
                     <p class="body-text">Custom AI software development services designed to automate workflows and build intelligent systems.</p>
                 </div>
             </a>
             <a href="web-application-development.php" style="text-decoration:none;">
-                <div class="card float-card reveal-card">
+                <div class="card float-card reveal-card" data-depth="10">
                     <div style="font-size:32px; margin-bottom:20px;">💻</div>
                     <h3 class="card-title">Web Application Development</h3>
                     <p class="body-text">AI-enabled web application development services for scalable platforms and dashboards.</p>
                 </div>
             </a>
             <a href="mobile-application-development.php" style="text-decoration:none;">
-                <div class="card float-card reveal-card">
+                <div class="card float-card reveal-card" data-depth="15">
                     <div style="font-size:32px; margin-bottom:20px;">📱</div>
                     <h3 class="card-title">Mobile Application Development</h3>
                     <p class="body-text">AI mobile app development services for Android and iOS, built for real-world usage.</p>
@@ -67,6 +68,7 @@ require_once 'includes/header.php';
 
 <!-- SECTION 3: WHAT DIGI9 BUILDS -->
 <section class="section">
+    <div class="light-shaft"></div>
     <div class="container">
         <div class="grid-2" style="align-items:center;">
             <div class="reveal">
@@ -93,27 +95,28 @@ require_once 'includes/header.php';
 
 <!-- SECTION 4: WHY DIGI9 -->
 <section class="section-alt">
+    <div class="light-shaft"></div>
     <div class="container">
         <div class="reveal text-center">
             <div class="eyebrow">The Digi9 Edge</div>
             <h2 class="section-title">Why Businesses Choose Digi9</h2>
             <div class="grid-4" style="margin-top:64px;">
-                <div class="card reveal-card">
+                <div class="card reveal-card" data-depth="5">
                     <div class="card-number">01</div>
                     <h3 class="card-title">Custom First</h3>
                     <p class="body-text">No white-label apps. Everything is built from scratch for your specific business logic.</p>
                 </div>
-                <div class="card reveal-card">
+                <div class="card reveal-card" data-depth="10">
                     <div class="card-number">02</div>
                     <h3 class="card-title">Engineering Excellence</h3>
                     <p class="body-text">Our team brings deep expertise in AI integration and scalable cloud architecture.</p>
                 </div>
-                <div class="card reveal-card">
+                <div class="card reveal-card" data-depth="15">
                     <div class="card-number">03</div>
                     <h3 class="card-title">Real Experience</h3>
                     <p class="body-text">Direct experience building systems for both high-growth startups and government scale.</p>
                 </div>
-                <div class="card reveal-card">
+                <div class="card reveal-card" data-depth="20">
                     <div class="card-number">04</div>
                     <h3 class="card-title">End-to-End</h3>
                     <p class="body-text">We handle everything from discovery and design to deployment and optimization.</p>
@@ -125,6 +128,7 @@ require_once 'includes/header.php';
 
 <!-- SECTION 5: INDUSTRIES -->
 <section class="section">
+    <div class="light-shaft"></div>
     <div class="container text-center">
         <div class="reveal eyebrow">Industries</div>
         <div class="reveal industry-list" style="margin-top:40px;">
@@ -141,6 +145,7 @@ require_once 'includes/header.php';
 
 <!-- SECTION 6: FINAL CTA -->
 <section class="cta-section">
+    <div class="light-shaft"></div>
     <div class="cta-glow"></div>
     <div class="container">
         <div class="reveal">
