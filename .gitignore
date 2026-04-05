@@ -4,3 +4,5 @@ node_modules/
 .vercel/
 .gemini/
 start_server.ps1
+
+.vercel

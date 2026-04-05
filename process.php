@@ -1,6 +1,5 @@
 <?php $page_title = "Process — How We Build Systems That Actually Work"; ?>
 <?php include 'includes/header.php'; ?>
-<?php include 'includes/navbar.php'; ?>
 
 <!-- ##### PAGE HEADER ##### -->
 <div class="page-header" style="background: linear-gradient(160deg, #F8FAFE 0%, #EEF4FF 100%); padding: 120px 0 64px; border-bottom: 1px solid var(--gray-200);">
