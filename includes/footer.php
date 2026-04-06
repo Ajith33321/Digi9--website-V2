@@ -49,6 +49,7 @@
 
 <!-- Global Fixed Mascot Container -->
 <div class="mascot-container">
+    <!-- MASCOT_FIX_VERIFIED -->
     <div class="hero-glow"></div>
     <canvas id="mascot-canvas"></canvas>
 </div>
