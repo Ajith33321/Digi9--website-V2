@@ -1,12 +1,11 @@
 </main>
 
-<footer style="margin-top:auto;">
-    <div class="light-shaft"></div>
+<footer>
     <div class="container">
         <div class="footer-grid">
             <!-- Brand -->
             <div>
-                <a href="index.php" class="footer-logo">Digi9</a>
+                <a href="index.php" class="footer-logo">Digi<span>9</span></a>
                 <p class="footer-text">An AI and custom software development company in Bangalore, India, serving clients globally.</p>
             </div>
             
@@ -32,8 +31,8 @@
             <!-- Contact Col -->
             <div class="footer-links">
                 <div class="footer-heading">Contact</div>
-                <a href="contact.php" style="color: var(--accent); font-weight:600;">Book a Consultation</a>
-                <div style="margin-top: 16px; font-size: 14px; color: rgba(255,255,255,0.7);">
+                <a href="contact.php" style="color: var(--accent-cyan); font-weight:600;">Book a Consultation</a>
+                <div style="margin-top: 16px; font-size: 14px; color: var(--text-muted);">
                     <p style="margin-bottom: 4px;">Bangalore, India</p>
                     <a href="mailto:hello@digi9.in" style="margin-bottom: 0;">hello@digi9.in</a>
                 </div>
@@ -42,18 +41,18 @@
         
         <div class="footer-bottom">
             <div>&copy; <?php echo date('Y'); ?> Digi9. All rights reserved.</div>
-            <div>AI & Custom Software Development Company in Bangalore</div>
+            <div>Made in Bangalore, India 🇮🇳</div>
         </div>
     </div>
 </footer>
 
-<!-- Global Fixed Mascot Container -->
+<!-- Persistent Virtual Mascot Layer (Desktop Only) -->
 <div class="mascot-container">
-    <!-- MASCOT_FIX_VERIFIED -->
     <div class="hero-glow"></div>
     <canvas id="mascot-canvas"></canvas>
 </div>
 
+<!-- Core Tech Layer Scripts -->
 <script src="/assets/js/navbar.js"></script>
 <script src="/assets/js/scroll-effects.js"></script>
 <script src="/assets/js/main.js"></script>

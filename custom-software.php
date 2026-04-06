@@ -1,64 +1,42 @@
-<?php $page_title = "Custom Software Development Services in Bangalore | Digi9"; ?>
-<?php include 'includes/header.php'; ?>
+<?php 
+$pageTitle = "Custom Software Solutions | Digi9";
+$metaDescription = "Specialized software engineering for enterprise-grade automation, legacy system connectivity, and complex operational integration in Bangalore.";
+include 'includes/header.php'; 
+?>
 
-<!-- ##### PAGE HEADER ##### -->
-<div class="page-header section-alt" style="padding-top: 160px; padding-bottom: 80px; position:relative;">
-    <div class="light-shaft"></div>
-    <div class="container" style="display:flex; flex-direction:column; align-items:flex-start;">
-        <div class="reveal eyebrow">Expertise</div>
-        <h1 class="h1-mega reveal" data-depth="15">Custom <span class="text-gradient">Software</span> Development</h1>
-        <p class="subtext reveal">Building bespoke software systems designed specifically for your complex business workflows and enterprise operations.</p>
-    </div>
-</div>
-
-<!-- ##### SERVICE DETAIL ##### -->
-<section class="section">
-  <div class="container">
-    <div class="grid-2" style="align-items:start; margin-bottom:64px;">
-      <div class="reveal">
-        <div class="eyebrow">What We Build</div>
-        <h2 class="section-title">Systems Designed Around Your Business Logic</h2>
-        <p class="body-text" style="margin-bottom:28px;">Generic ERPs and CRMs often fail because they force you to change your workflow. We build systems that adapt to you, ensuring maximum team adoption and efficiency.</p>
-        <ul class="tick-list">
-          <li>Custom ERP and CRM platforms</li>
-          <li>Inventory and supply chain management</li>
-          <li>Operational workflow automation</li>
-          <li>Enterprise-level internal tools</li>
-          <li>Legacy software modernization</li>
-        </ul>
-      </div>
-      <div class="reveal">
-        <div class="eyebrow">Core Standards</div>
-        <h2 class="section-title">Built for Long-Term Value</h2>
-        <div style="display:flex; flex-direction:column; gap:16px;">
-          <div class="card card-shimmer">
-            <h3 class="card-title" style="font-size:18px;">Modular Architecture</h3>
-            <p class="body-text">We build systems in a modular way, allowing you to add new features and integrations as your business grows without re-building.</p>
-          </div>
-          <div class="card card-shimmer">
-            <h3 class="card-title" style="font-size:18px;">Data Integrity</h3>
-            <p class="body-text">We design rigorous data models that ensure your business information is accurate, traceable, and secure at all times.</p>
-          </div>
-          <div class="card card-shimmer">
-            <h3 class="card-title" style="font-size:18px;">Scalable Infrastructure</h3>
-            <p class="body-text">All our systems are deployed on modern cloud infrastructure (AWS/Azure/GCP) built for enterprise performance and scale.</p>
-          </div>
+<!-- SECTION 1: HERO -->
+<section class="section section-odd" style="padding-top: 180px;">
+    <div class="hero-glow"></div>
+    <div class="container">
+        <div class="reveal">
+            <div class="eyebrow">Service Detail</div>
+            <h1 class="h1-mega">Custom Software Solutions</h1>
+            <p class="subtext">Specialized software engineering for intensive operational bottlenecks.</p>
         </div>
-      </div>
     </div>
-  </div>
 </section>
 
-<!-- ##### FINAL CTA ##### -->
-<section class="cta-section">
-  <div class="cta-glow"></div>
-  <div class="container">
-    <div class="reveal text-center">
-      <h2 class="section-title" style="margin-bottom:16px;">Ready to Build Your Custom Software?</h2>
-      <p class="subtext" style="margin:0 auto 36px auto;">Tell us about your requirements and we'll design the right technical approach.</p>
-      <a href="contact.php" class="btn-primary">Start Your project →</a>
+<!-- SECTION 2: DETAIL -->
+<section class="section section-even">
+    <div class="container">
+        <div class="grid-2" style="align-items: center;">
+            <div class="reveal">
+                <h2 class="section-title" style="font-size: 32px;">Specialized Build Services</h2>
+                <p class="body-text" style="margin-bottom: 24px;">Our custom software development services in Bangalore focus on solving operational challenges that off-the-shelf software cannot reach.</p>
+                <ul class="tick-list">
+                    <li>RPA & Workflow automation engines</li>
+                    <li>Legacy system modern connectivity</li>
+                    <li>High-availability database architecture</li>
+                    <li>Secure middleware & API development</li>
+                </ul>
+            </div>
+            <div class="reveal">
+                <div class="card" style="height: 300px; display: flex; align-items: center; justify-content: center; font-size: 80px; background: linear-gradient(135deg, rgba(217, 119, 6, 0.1) 0%, rgba(13,22,30,1) 100%);">
+                    ⚙️
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
 
 <?php include 'includes/footer.php'; ?>

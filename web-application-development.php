@@ -1,64 +1,42 @@
-<?php $page_title = "Web Application Development Services in Bangalore | Digi9"; ?>
-<?php include 'includes/header.php'; ?>
+<?php 
+$pageTitle = "Web Application Development Services | Digi9";
+$metaDescription = "Custom web application development company in Bangalore. We build scalable platforms, AI-enabled dashboards, and enterprise-grade portals.";
+include 'includes/header.php'; 
+?>
 
-<!-- ##### PAGE HEADER ##### -->
-<div class="page-header section-alt" style="padding-top: 160px; padding-bottom: 80px; position:relative;">
-    <div class="light-shaft"></div>
-    <div class="container" style="display:flex; flex-direction:column; align-items:flex-start;">
-        <div class="reveal eyebrow">Expertise</div>
-        <h1 class="h1-mega reveal" data-depth="15">Web Application <span class="text-gradient">Development</span></h1>
-        <p class="subtext reveal">Custom web application development services in Bangalore for scalable business platforms, portals, and dashboards.</p>
-    </div>
-</div>
-
-<!-- ##### SERVICE DETAIL ##### -->
-<section class="section">
-  <div class="container">
-    <div class="grid-2" style="align-items:start; margin-bottom:64px;">
-      <div class="reveal">
-        <div class="eyebrow">What We Build</div>
-        <h2 class="section-title">Scalable Platforms for Production Environments</h2>
-        <p class="body-text" style="margin-bottom:28px;">We use modern stacks (React, Next.js, Node.js, Python) to build performant web applications that integrate deeply with your data and workflows.</p>
-        <ul class="tick-list">
-          <li>Enterprise-grade admin dashboards</li>
-          <li>Customer-facing service portals</li>
-          <li>Operational management platforms</li>
-          <li>Real-time data visualization tools</li>
-          <li>Cloud-native SaaS applications</li>
-        </ul>
-      </div>
-      <div class="reveal">
-        <div class="eyebrow">Core Standards</div>
-        <h2 class="section-title">Built for Reliability</h2>
-        <div style="display:flex; flex-direction:column; gap:16px;">
-          <div class="card card-shimmer">
-            <h3 class="card-title" style="font-size:18px;">Security First</h3>
-            <p class="body-text">Every application is built with security as a baseline, implementing RBAC and data encryption for enterprise compliance.</p>
-          </div>
-          <div class="card card-shimmer">
-            <h3 class="card-title" style="font-size:18px;">High Availability</h3>
-            <p class="body-text">Stateless architectures designed to handle unpredictable traffic and scale automatically on cloud infrastructure.</p>
-          </div>
-          <div class="card card-shimmer">
-            <h3 class="card-title" style="font-size:18px;">API-Centric</h3>
-            <p class="body-text">We build systems that are ready to connect to anything. Clear, documented APIs for all your business logic.</p>
-          </div>
+<!-- SECTION 1: HERO -->
+<section class="section section-odd" style="padding-top: 180px;">
+    <div class="hero-glow"></div>
+    <div class="container">
+        <div class="reveal">
+            <div class="eyebrow">Service Detail</div>
+            <h1 class="h1-mega">Web Application Development</h1>
+            <p class="subtext">Building scalable, AI-enabled platforms for enterprise-intensive usage.</p>
         </div>
-      </div>
     </div>
-  </div>
 </section>
 
-<!-- ##### FINAL CTA ##### -->
-<section class="cta-section">
-  <div class="cta-glow"></div>
-  <div class="container">
-    <div class="reveal text-center">
-      <h2 class="section-title" style="margin-bottom:16px;">Ready to Build Your Web Platform?</h2>
-      <p class="subtext" style="margin:0 auto 36px auto;">Tell us about your requirements and we'll design the right technical approach.</p>
-      <a href="contact.php" class="btn-primary">Start Your project →</a>
+<!-- SECTION 2: DETAIL -->
+<section class="section section-even">
+    <div class="container">
+        <div class="grid-2" style="align-items: center;">
+            <div class="reveal">
+                <h2 class="section-title" style="font-size: 32px;">Enterprise Web Engineering</h2>
+                <p class="body-text" style="margin-bottom: 24px;">Our web application development services in Bangalore focus on high performance and long-term scalability.</p>
+                <ul class="tick-list">
+                    <li>AI web application development integrations</li>
+                    <li>Scalable cloud architecture using Next.js/React</li>
+                    <li>Enterprise-grade portal & dashboard engineering</li>
+                    <li>Secure data-driven application platforms</li>
+                </ul>
+            </div>
+            <div class="reveal">
+                <div class="card" style="height: 300px; display: flex; align-items: center; justify-content: center; font-size: 80px; background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(13,22,30,1) 100%);">
+                    💻
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
 
 <?php include 'includes/footer.php'; ?>

@@ -1,89 +1,91 @@
-<?php
-$pageTitle = "AI Software Development Company in India for Custom Business Systems | Digi9";
-$metaDescription = "Digi9 offers custom AI software development services in Bangalore including web, mobile, enterprise software, and automation solutions.";
-require_once 'includes/header.php';
+<?php 
+$pageTitle = "Custom AI Software Development Services in India | Digi9";
+$metaDescription = "Digi9 provides specialized AI software development, enterprise web applications, and intelligent mobile solutions built for complex business operations.";
+include 'includes/header.php'; 
 ?>
 
-<div class="page-header section-alt" style="padding-top: 160px; padding-bottom: 80px; position:relative;">
-    <div class="light-shaft"></div>
-    <div class="container" style="display:flex; flex-direction:column; align-items:flex-start;">
-        <div class="reveal eyebrow">Services</div>
-        <h1 class="h1-mega reveal" data-depth="15">AI Software Development Company in India for Custom Business Systems</h1>
-        <p class="subtext reveal">We build intelligent systems, automation tools, and AI-powered applications engineered specifically for your operations.</p>
-    </div>
-</div>
-
-<section class="section">
+<!-- SECTION 1: HERO -->
+<section class="section section-odd" style="padding-top: 180px;">
+    <div class="hero-glow"></div>
     <div class="container">
-        
-        <!-- Service 1 -->
-        <div class="reveal" style="margin-bottom: 80px; padding: 48px; background: rgba(255,255,255,0.05); border-radius: 24px; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px);">
-            <div data-depth="5">
-                <div style="font-size:40px; margin-bottom:24px;">🤖</div>
-                <h2 class="section-title" style="margin-bottom: 24px;">AI Software Development</h2>
-                <p class="body-text" style="margin-bottom: 32px;">We are a custom AI software development company in Bangalore building intelligent systems, automation tools, and AI-powered applications.</p>
-                <div class="grid-2">
-                    <ul class="tick-list">
+        <div class="reveal">
+            <div class="eyebrow">Our Specialization</div>
+            <h1 class="h1-mega">Engineered Intelligence & Custom Software</h1>
+            <p class="subtext">We build specialized systems that match how your business actually works.</p>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 2: SERVICES LIST -->
+<section class="section section-even">
+    <div class="container">
+        <div class="grid-2">
+            
+            <!-- Service 1: AI -->
+            <div class="reveal">
+                <div class="card">
+                    <div class="card-icon">🤖</div>
+                    <h2 class="card-title">AI Software Development</h2>
+                    <p class="body-text" style="margin-bottom: 24px;">Custom AI software development services building intelligent systems and automation tools engineered specifically for your operations.</p>
+                    <ul class="tick-list" style="margin-bottom: 32px;">
                         <li>LLM-based applications</li>
                         <li>Machine learning systems</li>
-                    </ul>
-                    <ul class="tick-list">
                         <li>Intelligent automation tools</li>
-                        <li>Data mining AI software</li>
+                        <li>Data mining custom AI software</li>
                     </ul>
+                    <a href="ai-software-development.php" class="btn-outline">Explore Service Detail →</a>
                 </div>
-                <a href="ai-software-development.php" class="btn-primary mt-4" style="display:inline-block; margin-top:24px;">View Service Details →</a>
             </div>
-        </div>
 
-        <!-- Service 2 -->
-        <div class="reveal" style="margin-bottom: 80px; padding: 48px; background: rgba(255,255,255,0.05); border-radius: 24px; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px);">
-            <div data-depth="10">
-                <div style="font-size:40px; margin-bottom:24px;">💻</div>
-                <h2 class="section-title" style="margin-bottom: 24px;">Web Application Development</h2>
-                <p class="body-text" style="margin-bottom: 32px;">AI web application development services for scalable platforms, dashboards, and portals.</p>
-                <ul class="tick-list" style="margin-bottom:24px;">
-                    <li>Customer and partner portals</li>
-                    <li>AI web development company in Bangalore</li>
-                    <li>AI website development company integrations</li>
-                </ul>
-                <a href="web-application-development.php" class="btn-primary mt-4" style="display:inline-block;">Explore Web Platforms →</a>
+            <!-- Service 2: Web -->
+            <div class="reveal">
+                <div class="card">
+                    <div class="card-icon">💻</div>
+                    <h2 class="card-title">Web Application Development</h2>
+                    <p class="body-text" style="margin-bottom: 24px;">AI-enabled web application development services for scalable platforms, dashboards, and portals built for intensive usage.</p>
+                    <ul class="tick-list" style="margin-bottom: 32px;">
+                        <li>Customer and partner portals</li>
+                        <li>AI web development company Bangalore</li>
+                        <li>AI website development company integrations</li>
+                        <li>Scalable enterprise web systems</li>
+                    </ul>
+                    <a href="web-application-development.php" class="btn-outline">Explore Service Detail →</a>
+                </div>
             </div>
-        </div>
 
-        <!-- Service 3 -->
-        <div style="margin-bottom: 80px; padding-bottom: 80px; border-bottom: 1px solid var(--border);">
-            <div class="grid-2">
-                <div>
-                    <h2 class="section-title" style="margin-bottom: 24px;">Mobile Application Development</h2>
-                    <ul class="tick-list">
+            <!-- Service 3: Mobile -->
+            <div class="reveal">
+                <div class="card" style="margin-top: 40px;">
+                    <div class="card-icon">📱</div>
+                    <h2 class="card-title">Mobile Application Development</h2>
+                    <p class="body-text" style="margin-bottom: 24px;">Custom mobile application development services for Android and iOS, built with AI integration for real-world business usage.</p>
+                    <ul class="tick-list" style="margin-bottom: 32px;">
+                        <li>Custom AI mobile software development</li>
                         <li>Enterprise internal systems</li>
                         <li>Custom workflow software</li>
                         <li>Complex platform engineering</li>
                     </ul>
-                    <a href="custom-software.php" class="btn-outline mt-4">View Service →</a>
+                    <a href="mobile-application-development.php" class="btn-outline">Explore Service Detail →</a>
                 </div>
             </div>
-        </div>
 
-        <!-- Service 5 -->
-        <div>
-            <div class="grid-2">
-                <div>
-                    <h2 class="section-title" style="margin-bottom: 24px;">Automation and Integration</h2>
-                    <p class="body-text" style="font-weight: 500; color: var(--primary);">Connect tools, automate processes, and improve efficiency.</p>
-                </div>
-                <div>
-                    <ul class="tick-list">
+            <!-- Service 4: Custom -->
+            <div class="reveal">
+                <div class="card" style="margin-top: 40px;">
+                    <div class="card-icon">⚙️</div>
+                    <h2 class="card-title">Custom Software Solutions</h2>
+                    <p class="body-text" style="margin-bottom: 24px;">Specialized software engineering for legacy system connectivity, RPA, and complex system integrations.</p>
+                    <ul class="tick-list" style="margin-bottom: 32px;">
                         <li>API integrations</li>
                         <li>RPA and process automation</li>
                         <li>Legacy system connectivity</li>
+                        <li>Database architecture & scaling</li>
                     </ul>
-                    <a href="solutions.php" class="btn-outline mt-4">View Solutions →</a>
+                    <a href="custom-software.php" class="btn-outline">Explore Service Detail →</a>
                 </div>
             </div>
-        </div>
 
+        </div>
     </div>
 </section>
 

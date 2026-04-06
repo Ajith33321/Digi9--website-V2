@@ -1,53 +1,67 @@
-<?php $page_title = "Solutions — AI Powered Business Systems"; ?>
-<?php include 'includes/header.php'; ?>
+<?php 
+$pageTitle = "Solutions — AI Powered Business Systems | Digi9";
+$metaDescription = "Digi9 delivers end-to-end automation, system integration, and AI-powered business intelligence solutions tailored for intensive operational success.";
+include 'includes/header.php'; 
+?>
 
-<!-- ##### PAGE HEADER ##### -->
-<div class="page-header section-alt" style="padding-top: 160px; padding-bottom: 80px; position:relative;">
-    <div class="light-shaft"></div>
-    <div class="container" style="display:flex; flex-direction:column; align-items:flex-start;">
-        <div class="reveal eyebrow">Solutions</div>
-        <h1 class="h1-mega reveal" data-depth="15">Business Solutions Powered by <span class="text-gradient">AI and Engineering</span></h1>
-        <p class="subtext reveal">We deliver end-to-end solutions across automation, integration, and AI — tailored to specific industries and operational challenges.</p>
+<!-- SECTION 1: HERO -->
+<section class="section section-odd" style="padding-top: 180px;">
+    <div class="hero-glow"></div>
+    <div class="container">
+        <div class="reveal">
+            <div class="eyebrow">Enterprise Solutions</div>
+            <h1 class="h1-mega">Automation & System Intelligence</h1>
+            <p class="subtext">Specialized builds that connect your complex systems and automate high-value operations.</p>
+        </div>
     </div>
-</div>
-
-<!-- ##### SOLUTIONS GRID ##### -->
-<section class="section">
-  <div class="container">
-    <div class="grid-2">
-      
-      <div class="card reveal-card" data-depth="5">
-        <div style="font-size:32px; margin-bottom:24px;">⚙️</div>
-        <h3 class="card-title">Process Automation</h3>
-        <p class="body-text" style="margin-bottom:20px; color:rgba(255,255,255,0.7);">Eliminate manual, repetitive work across departments. From document processing to multi-step approval workflows — we automate the full cycle.</p>
-        <ul class="tick-list">
-          <li>Document and data processing</li>
-          <li>Approval and notification cycles</li>
-        </ul>
-      </div>
-
-      <div class="card reveal-card" data-depth="10">
-        <div style="font-size:32px; margin-bottom:24px;">🔗</div>
-        <h3 class="card-title">System Integration</h3>
-        <p class="body-text" style="margin-bottom:20px; color:rgba(255,255,255,0.7);">Connect disparate tools and platforms into a single, coherent system. No more manual data transfer or siloed operations.</p>
-        <ul class="tick-list">
-          <li>API and third-party integrations</li>
-          <li>Legacy system modernisation</li>
-        </ul>
-      </div>
-
-    </div>
-  </div>
 </section>
 
-<!-- ##### FINAL CTA ##### -->
-<section class="cta-section">
-  <div class="cta-glow"></div>
+<!-- SECTION 2: SOLUTIONS GRID -->
+<section class="section section-even">
+    <div class="container">
+        <div class="grid-3">
+            <!-- Sol 1 -->
+            <div class="reveal">
+                <div class="card">
+                    <div class="card-icon">⚙️</div>
+                    <h3 class="card-title">Workflow Automation</h3>
+                    <p class="body-text">RPA and custom-built engines to eliminate repetitive operational logic across your team.</p>
+                </div>
+            </div>
+            <!-- Sol 2 -->
+            <div class="reveal">
+                <div class="card">
+                    <div class="card-icon">🔗</div>
+                    <h3 class="card-title">Legacy System Connectivity</h3>
+                    <p class="body-text">Bridging outdated systems with modern AI-layers for data extraction and process modernization.</p>
+                </div>
+            </div>
+            <!-- Sol 3 -->
+            <div class="reveal">
+                <div class="card">
+                    <div class="card-icon">📊</div>
+                    <h3 class="card-title">Intelligent Dashboards</h3>
+                    <p class="body-text">Predictive analytics and real-time visualization of your operational data streams.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 3: SECTORS -->
+<section class="section section-odd">
   <div class="container">
-    <div class="reveal text-center">
-      <h2 class="section-title" style="margin-bottom:16px;">Let's Identify the Right Solution for You</h2>
-      <p class="subtext" style="margin:0 auto 36px auto;">We'll map your challenges to the right technology approach.</p>
-      <a href="contact.php" class="btn-primary">Book a Consultation →</a>
+    <div class="reveal" style="max-width: 600px; margin-bottom: 48px;">
+        <div class="eyebrow">Targeted Results</div>
+        <h2 class="section-title">Solutions by Industry</h2>
+    </div>
+    
+    <div class="reveal tag-cloud">
+        <span class="tag">Government Operations</span>
+        <span class="tag">Automated Compliance</span>
+        <span class="tag">Healthcare Scheduling</span>
+        <span class="tag">Financial Reconciliation</span>
+        <span class="tag">Logistics Optimization</span>
     </div>
   </div>
 </section>

@@ -1,81 +1,64 @@
-<?php $page_title = "Process — How We Build Systems That Actually Work"; ?>
-<?php include 'includes/header.php'; ?>
+<?php 
+$pageTitle = "Our Engineering Process — How We Build | Digi9";
+$metaDescription = "Our structured approach to building software that actually works. We follow discovery, architectural design, agile engineering, and QA-first deployment.";
+include 'includes/header.php'; 
+?>
 
-<!-- ##### PAGE HEADER ##### -->
-<div class="page-header section-alt" style="padding-top: 160px; padding-bottom: 80px; position:relative;">
-    <div class="light-shaft"></div>
-    <div class="container" style="display:flex; flex-direction:column; align-items:flex-start;">
-        <div class="reveal eyebrow">Our Methodology</div>
-        <h1 class="h1-mega reveal" data-depth="15">How We Build Systems That <span class="text-gradient">Actually Work</span></h1>
-        <p class="subtext reveal">A clear, structured process built around understanding first and engineering second — so what we build actually solves the right problem.</p>
+<!-- SECTION 1: HERO -->
+<section class="section section-odd" style="padding-top: 180px;">
+    <div class="hero-glow"></div>
+    <div class="container">
+        <div class="reveal">
+            <div class="eyebrow">Methodology</div>
+            <h1 class="h1-mega">How We Work</h1>
+            <p class="subtext">Our structured approach to building software that actually works.</p>
+        </div>
     </div>
-</div>
-
-<!-- ##### PROCESS STEPS ##### -->
-<section class="section">
-  <div class="container" style="max-width:960px;">
-    <div class="process-timeline">
-
-      <!-- Step 1 -->
-      <div class="process-step reveal" data-depth="5">
-        <div style="display:flex; flex-direction:column; align-items:center;">
-          <div class="step-num">01</div>
-          <div class="step-dot"></div>
-        </div>
-        <div>
-          <h3 class="card-title" style="font-size:22px; margin-bottom:12px;">Understand the Problem</h3>
-          <p class="body-text" style="margin-bottom:20px; color:rgba(255,255,255,0.73);">Before any design or development, we spend time understanding your business, your team, and the specific problem you're trying to solve.</p>
-        </div>
-      </div>
-
-      <!-- Step 2 -->
-      <div class="process-step reveal" data-depth="10">
-        <div style="display:flex; flex-direction:column; align-items:center;">
-          <div class="step-num">02</div>
-          <div class="step-dot"></div>
-        </div>
-        <div>
-          <h3 class="card-title" style="font-size:22px; margin-bottom:12px;">Design the System</h3>
-          <p class="body-text" style="margin-bottom:20px; color:rgba(255,255,255,0.73);">Architecture, data flows, and user experience are designed in detail before development begins. We produce clear documentation so every decision is traceable.</p>
-        </div>
-      </div>
-
-      <!-- Step 3 -->
-      <div class="process-step reveal" data-depth="5">
-        <div style="display:flex; flex-direction:column; align-items:center;">
-          <div class="step-num">03</div>
-          <div class="step-dot"></div>
-        </div>
-        <div>
-          <h3 class="card-title" style="font-size:22px; margin-bottom:12px;">Build and Iterate</h3>
-          <p class="body-text" style="margin-bottom:20px; color:rgba(255,255,255,0.73);">Development happens in structured sprints with working software delivered at every milestone. You see real progress, not status updates.</p>
-        </div>
-      </div>
-
-      <!-- Step 4 -->
-      <div class="process-step reveal" data-depth="10">
-        <div style="display:flex; flex-direction:column; align-items:center;">
-          <div class="step-num">04</div>
-          <div class="step-dot"></div>
-        </div>
-        <div>
-          <h3 class="card-title" style="font-size:22px; margin-bottom:12px;">Deployment</h3>
-          <p class="body-text" style="margin-bottom:20px; color:rgba(255,255,255,0.73);">Production deployment is handled with care — infrastructure setup, data migration, user onboarding, and go-live support.</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
 </section>
 
-<!-- ##### FINAL CTA ##### -->
-<section class="cta-section">
-  <div class="cta-glow"></div>
+<!-- SECTION 2: PROCESS TIMELINE -->
+<section class="section section-even">
+    <div class="container">
+        <div class="process-timeline reveal">
+            <div class="process-step">
+                <div class="step-num-bg">01</div>
+                <h3 class="card-title">Discovery & Strategy</h3>
+                <p class="body-text">Operational review and ROI mapping for your software needs. We identify exactly where AI or custom software creates high value.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-num-bg">02</div>
+                <h3 class="card-title">Architectural Design</h3>
+                <p class="body-text">Technical blueprinting and user-centric experience design. Building the foundation for scalability and secure operations.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-num-bg">03</div>
+                <h3 class="card-title">Agile Engineering</h3>
+                <p class="body-text">High-speed, iterative engineering with weekly demonstrations and feedback loops to ensure alignment.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-num-bg">04</div>
+                <h3 class="card-title">Stress Testing & Launch</h3>
+                <p class="body-text">Deployment, rigorous stress-testing, and ongoing operational support to ensure absolute stability.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 3: TECH STACK -->
+<section class="section section-odd">
   <div class="container">
-    <div class="reveal text-center">
-      <h2 class="section-title" style="margin-bottom:16px;">Ready to Start the Discovery Phase?</h2>
-      <p class="subtext" style="margin:0 auto 36px auto;">Book a consultation and let's map out your project together.</p>
-      <a href="contact.php" class="btn-primary">Book a Consultation →</a>
+    <div class="reveal" style="max-width: 600px; margin-bottom: 48px;">
+        <div class="eyebrow">Tools of Engagement</div>
+        <h2 class="section-title">Common Technologies We Use</h2>
+    </div>
+    
+    <div class="reveal tag-cloud">
+        <span class="tag">Next.js / React</span>
+        <span class="tag">Python AI Frameworks</span>
+        <span class="tag">Node.js</span>
+        <span class="tag">PostgreSQL / MongoDB</span>
+        <span class="tag">Docker / Kubernetes</span>
+        <span class="tag">AWS / Azure / GCP</span>
     </div>
   </div>
 </section>

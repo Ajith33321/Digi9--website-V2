@@ -1,64 +1,42 @@
-<?php $page_title = "Mobile App Development Services in Bangalore | Digi9"; ?>
-<?php include 'includes/header.php'; ?>
+<?php 
+$pageTitle = "Mobile Application Development Services | Digi9";
+$metaDescription = "Custom mobile application development company in Bangalore. We build AI-integrated mobile apps for Android and iOS that solve real business operational challenges.";
+include 'includes/header.php'; 
+?>
 
-<!-- ##### PAGE HEADER ##### -->
-<div class="page-header section-alt" style="padding-top: 160px; padding-bottom: 80px; position:relative;">
-    <div class="light-shaft"></div>
-    <div class="container" style="display:flex; flex-direction:column; align-items:flex-start;">
-        <div class="reveal eyebrow">Expertise</div>
-        <h1 class="h1-mega reveal" data-depth="15">Mobile Application <span class="text-gradient">Development</span></h1>
-        <p class="subtext reveal">Custom mobile app development services in Bangalore for internal enterprise systems and customer-facing platforms.</p>
-    </div>
-</div>
-
-<!-- ##### SERVICE DETAIL ##### -->
-<section class="section">
-  <div class="container">
-    <div class="grid-2" style="align-items:start; margin-bottom:64px;">
-      <div class="reveal">
-        <div class="eyebrow">What We Build</div>
-        <h2 class="section-title">Engineered for Reliability in the Field</h2>
-        <p class="body-text" style="margin-bottom:28px;">We use Flutter and native technologies to build performant mobile applications that work reliably, even with offline data synchronization and real-time features.</p>
-        <ul class="tick-list">
-          <li>Custom business apps for internal teams</li>
-          <li>Customer-facing service and commerce apps</li>
-          <li>Offline-first applications for remote workers</li>
-          <li>Real-time tracking and monitoring tools</li>
-          <li>AI-enabled mobile features and chatbots</li>
-        </ul>
-      </div>
-      <div class="reveal">
-        <div class="eyebrow">Core Standards</div>
-        <h2 class="section-title">Built for Performance</h2>
-        <div style="display:flex; flex-direction:column; gap:16px;">
-          <div class="card card-shimmer">
-            <h3 class="card-title" style="font-size:18px;">Native Performance</h3>
-            <p class="body-text">Optimised code focusing on smooth 60fps animations and rapid data loading, ensuring a premium user experience.</p>
-          </div>
-          <div class="card card-shimmer">
-            <h3 class="card-title" style="font-size:18px;">Offline First</h3>
-            <p class="body-text">Robust data persistence layers allowing users to perform operations without an active internet connection.</p>
-          </div>
-          <div class="card card-shimmer">
-            <h3 class="card-title" style="font-size:18px;">Deep Integration</h3>
-            <p class="body-text">We connect your mobile apps directly to your enterprise APIs and cloud databases for a unified data workflow.</p>
-          </div>
+<!-- SECTION 1: HERO -->
+<section class="section section-odd" style="padding-top: 180px;">
+    <div class="hero-glow"></div>
+    <div class="container">
+        <div class="reveal">
+            <div class="eyebrow">Service Detail</div>
+            <h1 class="h1-mega">Mobile Application Development</h1>
+            <p class="subtext">Custom AI mobile software development services for modern enterprises.</p>
         </div>
-      </div>
     </div>
-  </div>
 </section>
 
-<!-- ##### FINAL CTA ##### -->
-<section class="cta-section">
-  <div class="cta-glow"></div>
-  <div class="container">
-    <div class="reveal text-center">
-      <h2 class="section-title" style="margin-bottom:16px;">Ready to Build Your Mobile App?</h2>
-      <p class="subtext" style="margin:0 auto 36px auto;">Tell us about your requirements and we'll design the right technical approach.</p>
-      <a href="contact.php" class="btn-primary">Start Your project →</a>
+<!-- SECTION 2: DETAIL -->
+<section class="section section-even">
+    <div class="container">
+        <div class="grid-2" style="align-items: center;">
+            <div class="reveal">
+                <h2 class="section-title" style="font-size: 32px;">Intelligent Mobile Engineering</h2>
+                <p class="body-text" style="margin-bottom: 24px;">Our mobile application development services in Bangalore focus on native performance and deep AI integration.</p>
+                <ul class="tick-list">
+                    <li>Cross-platform engineering (Flutter/React Native)</li>
+                    <li>On-device machine learning modules</li>
+                    <li>Enterprise-grade offline operational capabilities</li>
+                    <li>High-fidelity user experience design</li>
+                </ul>
+            </div>
+            <div class="reveal">
+                <div class="card" style="height: 300px; display: flex; align-items: center; justify-content: center; font-size: 80px; background: linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(13,22,30,1) 100%);">
+                    📱
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
 
 <?php include 'includes/footer.php'; ?>
