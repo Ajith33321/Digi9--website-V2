@@ -14,7 +14,7 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#030307;--bg2:#07070f;--surf:#0d0d1a;--surf2:#12122a;--p:#7c3aed;--b:#3b82f6;--c:#00d4ff;--g:#f5c842;--t:#f0eeff;--t2:#9b97c4;--t3:#5a5780;--br:rgba(124,58,237,.15);--br2:rgba(124,58,237,.3);--fh:'Syne',sans-serif;--fb:'DM Sans',sans-serif;--nav:68px}
-html{scroll-behavior:smooth}
+html{scroll-behavior:auto}
 body{font-family:var(--fb);background:var(--bg);color:var(--t);overflow-x:hidden;cursor:none}
 a{color:inherit;text-decoration:none}
 ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--p);border-radius:2px}
@@ -451,6 +451,148 @@ gsap.from('.hero-btns',{opacity:0,y:20,duration:.8,delay:1});
 gsap.utils.toArray('.svc-item').forEach((el,i)=>{
   gsap.from(el,{scrollTrigger:{trigger:el,start:'top 80%'},opacity:0,y:60,duration:1});
 });
+</script>
+
+<!-- Lenis smooth scroll -->
+<script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+
+<!-- 3D Effects: Card Flip + Carousel -->
+<style>
+/* ── FLIP CARDS ─────────────────────────────────────── */
+.flip-wrap{perspective:1200px;cursor:default}
+.flip-inner{position:relative;width:100%;height:100%;min-height:300px;transition:transform .9s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d}
+.flip-wrap.flipped .flip-inner{transform:rotateY(180deg)}
+.flip-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:18px;padding:32px 28px}
+.flip-back-face{background:var(--surf2);border:1px solid var(--br);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.flip-back-face .fb-ico{font-size:3rem;margin-bottom:16px}
+.flip-back-face .fb-name{font-family:var(--fh);font-size:1.1rem;font-weight:700;color:var(--t2)}
+.flip-front-face{background:var(--surf);border:1px solid var(--br2);transform:rotateY(180deg)}
+
+/* ── 3D CAROUSEL ────────────────────────────────────── */
+#carousel-section{padding:120px 0;overflow:hidden}
+.car-stage{width:100%;height:480px;perspective:1400px;perspective-origin:50% 40%;display:flex;align-items:center;justify-content:center;position:relative}
+.car-wheel{width:320px;height:420px;position:relative;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.4,0,.2,1)}
+.car-panel{position:absolute;width:320px;height:380px;background:var(--surf);border:1px solid var(--br);border-radius:24px;padding:36px 28px;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;transition:all .4s}
+.car-panel.active-panel{background:var(--surf2);border-color:var(--br2);box-shadow:0 0 60px rgba(124,58,237,.3)}
+.car-ico{font-size:3.5rem;margin-bottom:20px}
+.car-title{font-family:var(--fh);font-size:1.25rem;font-weight:800;margin-bottom:12px;letter-spacing:-.02em}
+.car-desc{font-size:.875rem;color:var(--t2);line-height:1.65}
+.car-dots{display:flex;gap:10px;justify-content:center;margin-top:40px}
+.car-dot{width:8px;height:8px;border-radius:50%;background:var(--br2);transition:all .3s;cursor:pointer}
+.car-dot.on{background:var(--p);transform:scale(1.4)}
+.car-nav{display:flex;gap:16px;justify-content:center;margin-top:16px}
+.car-btn{background:var(--surf2);border:1px solid var(--br);color:var(--t2);width:44px;height:44px;border-radius:50%;font-size:18px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center}
+.car-btn:hover{border-color:var(--p);color:var(--p)}
+</style>
+
+<script>
+// ── LENIS ────────────────────────────────────────────
+const lenis=new Lenis({lerp:.1,smoothWheel:true});
+lenis.on('scroll',ScrollTrigger.update);
+gsap.ticker.add(t=>lenis.raf(t*1000));
+gsap.ticker.lagSmoothing(0);
+
+// ── CARD FLIP on scroll ──────────────────────────────
+(function(){
+  // Wrap existing service cards in flip structure
+  document.querySelectorAll('.svc-item').forEach((item,i)=>{
+    const titleEl=item.querySelector('.stitle, h2, h3');
+    const ico=item.querySelector('.svc-num');
+    const icoTxt=ico?ico.textContent:'0'+(i+1);
+    const title=titleEl?titleEl.textContent:'Service';
+
+    // Wrap the visual panel side in a flip card
+    const panel=item.querySelector('.card, [class*="vis"], [class*="panel"]');
+    if(!panel)return;
+    const orig=panel.innerHTML;
+    const backHTML=`<div class="flip-back-face"><div class="fb-ico">${['🧠','⚡','📱','⚙️','🤖'][i]||'🔧'}</div><div class="fb-name">${title}</div></div>`;
+    panel.innerHTML=`<div class="flip-inner"><div class="flip-face flip-back-face">${backHTML}</div><div class="flip-face flip-front-face">${orig}</div></div>`;
+    panel.classList.add('flip-wrap');
+    panel.style.cssText+='background:none;border:none;padding:0;overflow:visible';
+
+    ScrollTrigger.create({
+      trigger:item,start:'top 72%',
+      onEnter:()=>setTimeout(()=>panel.classList.add('flipped'),i*120),
+      onLeaveBack:()=>panel.classList.remove('flipped')
+    });
+  });
+})();
+
+// ── 3D CAROUSEL ──────────────────────────────────────
+(function(){
+  const svcs=[
+    {ico:'🧠',title:'AI Software Development',desc:'LLM & RAG systems that automate complex high-value workflows at scale'},
+    {ico:'⚡',title:'Web App Development',desc:'Scalable SaaS platforms and enterprise portals built to perform'},
+    {ico:'📱',title:'Mobile Development',desc:'Native-quality Flutter & React Native applications for iOS and Android'},
+    {ico:'⚙️',title:'Custom Software',desc:'Bespoke systems for operational problems that need real engineering'},
+    {ico:'🤖',title:'AI Agents & Automation',desc:'Autonomous workflows that execute multi-step tasks without human intervention'},
+  ];
+  const N=svcs.length;
+  const angleStep=360/N;
+  const radius=340;
+
+  // Build carousel HTML
+  const section=document.createElement('section');
+  section.id='carousel-section';
+  section.innerHTML=`
+    <div class="inner">
+      <div class="section-head center rv">
+        <span class="eyebrow">Services In Focus</span>
+        <h2 class="stitle">Every Service,<br><em>Front & Centre</em></h2>
+      </div>
+      <div class="car-stage">
+        <div class="car-wheel" id="car-wheel">
+          ${svcs.map((s,i)=>`<div class="car-panel${i===0?' active-panel':''}" style="transform:rotateY(${i*angleStep}deg) translateZ(${radius}px)">
+            <div class="car-ico">${s.ico}</div>
+            <div class="car-title">${s.title}</div>
+            <p class="car-desc">${s.desc}</p>
+          </div>`).join('')}
+        </div>
+      </div>
+      <div class="car-dots">${svcs.map((_,i)=>`<div class="car-dot${i===0?' on':''}" onclick="rotateTo(${i})"></div>`).join('')}</div>
+      <div class="car-nav">
+        <button class="car-btn" onclick="rotateTo((carIdx-1+${N})%${N})">&#8592;</button>
+        <button class="car-btn" onclick="rotateTo((carIdx+1)%${N})">&#8594;</button>
+      </div>
+    </div>`;
+
+  // Insert before footer
+  const footer=document.querySelector('footer');
+  if(footer)footer.parentNode.insertBefore(section,footer);
+
+  let carIdx=0;
+  const wheel=document.getElementById('car-wheel');
+
+  window.rotateTo=function(idx){
+    carIdx=((idx%N)+N)%N;
+    wheel.style.transform=`rotateY(${-carIdx*angleStep}deg)`;
+    document.querySelectorAll('.car-panel').forEach((p,i)=>{
+      p.classList.toggle('active-panel',i===carIdx);
+    });
+    document.querySelectorAll('.car-dot').forEach((d,i)=>{
+      d.classList.toggle('on',i===carIdx);
+    });
+  };
+
+  // Scroll-driven auto-rotate
+  ScrollTrigger.create({
+    trigger:'#carousel-section',start:'top 60%',end:'bottom 40%',
+    onUpdate:self=>{
+      const idx=Math.floor(self.progress*N)%N;
+      if(idx!==carIdx)rotateTo(idx);
+    }
+  });
+
+  // Entry animation
+  ScrollTrigger.create({
+    trigger:'#carousel-section',start:'top 80%',
+    onEnter:()=>{
+      document.querySelectorAll('.car-panel').forEach((p,i)=>{
+        gsap.from(p,{opacity:0,scale:.7,duration:.8,delay:i*.1,ease:'back.out(1.2)'});
+      });
+    }
+  });
+})();
 </script>
 </body>
 </html>

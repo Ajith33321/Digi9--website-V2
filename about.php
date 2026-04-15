@@ -14,7 +14,7 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#030307;--bg2:#07070f;--surf:#0d0d1a;--surf2:#12122a;--p:#7c3aed;--b:#3b82f6;--c:#00d4ff;--g:#f5c842;--t:#f0eeff;--t2:#9b97c4;--t3:#5a5780;--br:rgba(124,58,237,.15);--br2:rgba(124,58,237,.3);--fh:'Syne',sans-serif;--fb:'DM Sans',sans-serif;--nav:68px}
-html{scroll-behavior:smooth}
+html{scroll-behavior:auto}
 body{font-family:var(--fb);background:var(--bg);color:var(--t);overflow-x:hidden;cursor:none}
 a{color:inherit;text-decoration:none}
 ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--p);border-radius:2px}
@@ -474,6 +474,124 @@ gsap.utils.toArray('.stat-card').forEach((el,i)=>{
 gsap.utils.toArray('.culture-row').forEach((el,i)=>{
   gsap.from(el,{scrollTrigger:{trigger:el,start:'top 88%'},opacity:0,x:30,duration:.6,delay:i*.08});
 });
+</script>
+
+<!-- Lenis smooth scroll -->
+<script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+
+<!-- 3D Timeline Tunnel + Values Orbit -->
+<style>
+/* ── TIMELINE TUNNEL ─────────────────────────────────── */
+#tunnel-section{padding:120px 0;overflow:hidden}
+.tunnel-wrap{position:relative;max-width:900px;margin:0 auto;padding:60px 0}
+.tunnel-line{position:absolute;left:50%;top:0;bottom:0;width:2px;transform:translateX(-50%);background:linear-gradient(180deg,transparent,var(--p) 20%,var(--c) 80%,transparent);z-index:0}
+.tunnel-line::before,.tunnel-line::after{content:'';position:absolute;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:var(--c);box-shadow:0 0 20px var(--c)}
+.tunnel-line::before{top:0}.tunnel-line::after{bottom:0}
+.milestone{position:relative;z-index:1;width:45%;padding:28px;background:var(--surf);border:1px solid var(--br);border-radius:18px;margin-bottom:60px;opacity:0;transition:opacity .7s,transform .7s}
+.milestone.visible{opacity:1!important;transform:none!important}
+.milestone.left{margin-left:0;margin-right:auto;transform:translateX(-60px) rotateY(15deg)}
+.milestone.right{margin-left:auto;margin-right:0;transform:translateX(60px) rotateY(-15deg)}
+.milestone:hover{border-color:var(--br2);box-shadow:0 10px 40px rgba(124,58,237,.15)}
+.ms-year{font-family:var(--fh);font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,var(--p),var(--c));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+.ms-text{font-size:.9rem;color:var(--t2);line-height:1.65}
+/* connector dots */
+.milestone::after{content:'';position:absolute;top:50%;width:12px;height:12px;background:var(--p);border-radius:50%;box-shadow:0 0 16px var(--p)}
+.milestone.left::after{right:-6%;transform:translateY(-50%)}
+.milestone.right::after{left:-6%;transform:translateY(-50%)}
+
+/* ── VALUES ORBIT ────────────────────────────────────── */
+#orbit-section{padding:120px 0}
+.orbit-stage{position:relative;width:560px;height:560px;margin:0 auto}
+.orbit-hub{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,var(--p),var(--b));display:flex;align-items:center;justify-content:center;font-size:2rem;box-shadow:0 0 60px rgba(124,58,237,.4);z-index:2}
+.orbit-ring{position:absolute;inset:0;border:1px solid var(--br);border-radius:50%;animation:spin 20s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.orbit-card{position:absolute;width:160px;background:var(--surf);border:1px solid var(--br);border-radius:16px;padding:20px;text-align:center;transform-origin:50% 50%;transition:all .3s;cursor:default}
+.orbit-card:hover{border-color:var(--br2);box-shadow:0 10px 40px rgba(124,58,237,.2);transform:scale(1.08)!important}
+.orbit-card .o-ico{font-size:1.8rem;margin-bottom:8px}
+.orbit-card .o-title{font-family:var(--fh);font-size:.875rem;font-weight:700;margin-bottom:6px}
+.orbit-card .o-desc{font-size:.75rem;color:var(--t2);line-height:1.5}
+@media(max-width:640px){.orbit-stage{width:320px;height:320px}.orbit-card{width:110px;padding:12px}.orbit-card .o-desc{display:none}}
+</style>
+
+<script>
+// ── LENIS ────────────────────────────────────────────
+const lenis=new Lenis({lerp:.1,smoothWheel:true});
+lenis.on('scroll',ScrollTrigger.update);
+gsap.ticker.add(t=>lenis.raf(t*1000));
+gsap.ticker.lagSmoothing(0);
+
+// ── TIMELINE TUNNEL ──────────────────────────────────
+(function(){
+  const milestones=[
+    {year:'2020',text:'Founded in Bangalore with a mission to build software that actually works — no fluff, just execution.',side:'left'},
+    {year:'2021',text:'First enterprise AI deployment — LLM workflow automation for a major BFSI client.',side:'right'},
+    {year:'2022',text:'Expanded into mobile development — shipped 8 production apps across iOS and Android.',side:'left'},
+    {year:'2023',text:'Launched AI agent platform — serving 40+ enterprise clients across 7 industries.',side:'right'},
+    {year:'2024',text:'₹50Cr+ in client revenue generated through software we engineered.',side:'left'},
+  ];
+
+  const section=document.createElement('section');
+  section.id='tunnel-section';
+  section.innerHTML=`<div class="inner"><div class="section-head center rv" style="margin-bottom:72px"><span class="eyebrow">Our Journey</span><h2 class="stitle">Through the <em>Tunnel</em></h2></div>
+  <div class="tunnel-wrap"><div class="tunnel-line"></div>
+  ${milestones.map(m=>`<div class="milestone ${m.side}"><div class="ms-year">${m.year}</div><p class="ms-text">${m.text}</p></div>`).join('')}
+  </div></div>`;
+
+  const about=document.querySelector('section');
+  const footer=document.querySelector('footer');
+  if(footer)footer.parentNode.insertBefore(section,footer);
+
+  // Animate milestones on scroll
+  document.querySelectorAll('.milestone').forEach(ms=>{
+    ScrollTrigger.create({
+      trigger:ms,start:'top 82%',
+      onEnter:()=>ms.classList.add('visible'),
+    });
+  });
+})();
+
+// ── VALUES ORBIT ─────────────────────────────────────
+(function(){
+  const values=[
+    {ico:'🎯',title:'Execution First',desc:'We ship, not just design'},
+    {ico:'🔬',title:'Engineering Depth',desc:'Real engineers, real solutions'},
+    {ico:'🤝',title:'Client Aligned',desc:'Your success is our metric'},
+    {ico:'⚡',title:'Speed + Quality',desc:'Fast without cutting corners'},
+  ];
+
+  const section=document.createElement('section');
+  section.id='orbit-section';
+  const angles=[315,45,135,225]; // deg positions
+  const r=200; // orbit radius
+
+  section.innerHTML=`<div class="inner"><div class="section-head center rv" style="margin-bottom:72px"><span class="eyebrow">Our Values</span><h2 class="stitle">What We <em>Stand For</em></h2></div>
+  <div class="orbit-stage">
+    <div class="orbit-ring"></div>
+    <div class="orbit-hub">⚡</div>
+    ${values.map((v,i)=>{
+      const a=angles[i]*Math.PI/180;
+      const x=50+Math.cos(a)*50-14+'%'; // approximate % positions
+      const y=50+Math.sin(a)*50-14+'%';
+      return `<div class="orbit-card" style="left:${x};top:${y}"><div class="o-ico">${v.ico}</div><div class="o-title">${v.title}</div><p class="o-desc">${v.desc}</p></div>`;
+    }).join('')}
+  </div></div>`;
+
+  const footer=document.querySelector('footer');
+  if(footer)footer.parentNode.insertBefore(section,footer);
+
+  // Fly-in animation
+  ScrollTrigger.create({
+    trigger:'#orbit-section',start:'top 75%',once:true,
+    onEnter:()=>{
+      gsap.from('.orbit-card',{
+        opacity:0,scale:0,rotation:180,
+        duration:.9,stagger:.15,ease:'back.out(1.7)',
+        transformOrigin:'center center'
+      });
+      gsap.from('.orbit-hub',{opacity:0,scale:0,duration:.6,ease:'back.out(2)'});
+    }
+  });
+})();
 </script>
 </body>
 </html>

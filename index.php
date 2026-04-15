@@ -22,7 +22,7 @@
   --fh:'Syne',sans-serif;--fb:'DM Sans',sans-serif;
   --nav:68px;
 }
-html{scroll-behavior:smooth}
+html{scroll-behavior:auto}
 body{font-family:var(--fb);background:var(--bg);color:var(--t);overflow-x:hidden;cursor:none}
 a{color:inherit;text-decoration:none}
 ::-webkit-scrollbar{width:3px}
@@ -671,6 +671,8 @@ document.querySelectorAll('a,button,.mchip,.fq-q,.sv-card,.wk-card,.wc,.in-item'
     ctx.fillRect(0,0,W,H);
     t+=0.003;
     warp*=0.88;
+    // Boost from scroll dolly
+    if(window._warpBoost&&window._warpBoost>1){warp+=window._warpBoost*.4;}
 
     /* Nebula */
     blobs.forEach((b,i)=>{
@@ -767,12 +769,28 @@ if(typeof gsap!=='undefined'){
     });
   });
 
-  /* Stats — ignite (scale+glow) */
+  /* Stats — 3D Slot Machine Drum Roll */
   gsap.utils.toArray('.sn').forEach((el,i)=>{
+    // Wrap in drum container
+    const parent=el.parentElement;
+    const drum=document.createElement('div');
+    drum.style.cssText='overflow:hidden;height:1.15em;perspective:300px;display:block';
+    el.style.cssText+='display:block;transform-origin:50% 50% -20px;will-change:transform,opacity';
+    parent.insertBefore(drum,el);
+    drum.appendChild(el);
+
     ScrollTrigger.create({trigger:'#stats',start:'top 80%',once:true,onEnter:()=>{
-      let c=0,t=parseInt(el.dataset.n),sf=el.dataset.s||'';
-      const step=Math.ceil(t/50);
-      const timer=setInterval(()=>{c=Math.min(c+step,t);el.textContent=c+sf;if(c>=t)clearInterval(timer)},28);
+      // 3D roll-in
+      gsap.fromTo(el,
+        {rotateX:90,opacity:0,y:'100%'},
+        {rotateX:0,opacity:1,y:0,duration:.9,delay:i*.18,ease:'back.out(1.6)',
+         onStart:()=>{
+           let c=0,t=parseInt(el.dataset.n),sf=el.dataset.s||'';
+           const step=Math.ceil(t/60);
+           const timer=setInterval(()=>{c=Math.min(c+step,t);el.textContent=c+sf;if(c>=t)clearInterval(timer)},22);
+         }
+        }
+      );
     }});
   });
 
@@ -839,5 +857,94 @@ function msum(){
      <div class="srow"><strong>Notes:</strong> ${nt}</div>`;
 }
 </script>
+
+<!-- Lenis smooth scroll -->
+<script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+
+<!-- 3D Parallax Hero Layers + Camera Dolly -->
+<style>
+#hero{position:relative;overflow:hidden}
+/* Parallax depth layers */
+.layer-bg,.layer-mid,.layer-fg{position:absolute;inset:0;pointer-events:none;z-index:0;will-change:transform}
+/* BG: star field */
+.layer-bg{background:
+  radial-gradient(1px 1px at 10% 15%,rgba(255,255,255,.7) 0%,transparent 100%),
+  radial-gradient(1px 1px at 25% 60%,rgba(255,255,255,.5) 0%,transparent 100%),
+  radial-gradient(1px 1px at 40% 30%,rgba(255,255,255,.6) 0%,transparent 100%),
+  radial-gradient(1px 1px at 55% 75%,rgba(255,255,255,.4) 0%,transparent 100%),
+  radial-gradient(1px 1px at 70% 20%,rgba(255,255,255,.7) 0%,transparent 100%),
+  radial-gradient(1px 1px at 85% 50%,rgba(255,255,255,.5) 0%,transparent 100%),
+  radial-gradient(1px 1px at 15% 85%,rgba(255,255,255,.6) 0%,transparent 100%),
+  radial-gradient(1px 1px at 60% 45%,rgba(255,255,255,.4) 0%,transparent 100%),
+  radial-gradient(1px 1px at 90% 80%,rgba(255,255,255,.6) 0%,transparent 100%),
+  radial-gradient(1px 1px at 35% 10%,rgba(255,255,255,.8) 0%,transparent 100%),
+  radial-gradient(1.5px 1.5px at 48% 88%,rgba(200,180,255,.6) 0%,transparent 100%),
+  radial-gradient(1.5px 1.5px at 78% 35%,rgba(180,220,255,.5) 0%,transparent 100%)}
+/* MID: glowing orbs */
+.layer-mid::before,.layer-mid::after{content:'';position:absolute;border-radius:50%;filter:blur(40px)}
+.layer-mid::before{width:300px;height:300px;background:rgba(124,58,237,.08);top:10%;left:5%}
+.layer-mid::after{width:200px;height:200px;background:rgba(0,212,255,.06);top:40%;right:10%}
+/* FG: large glows */
+.layer-fg::before{content:'';position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(124,58,237,.05),transparent 70%);top:-10%;left:30%;border-radius:50%}
+/* Hero content stays above layers */
+#hero>*:not(.layer-bg):not(.layer-mid):not(.layer-fg){position:relative;z-index:1}
+</style>
+
+<script>
+// ── LENIS ────────────────────────────────────────────
+const lenis=new Lenis({lerp:.1,smoothWheel:true});
+lenis.on('scroll',ScrollTrigger.update);
+gsap.ticker.add(t=>lenis.raf(t*1000));
+gsap.ticker.lagSmoothing(0);
+
+// ── PARALLAX DEPTH LAYERS ────────────────────────────
+(function(){
+  const hero=document.getElementById('hero');
+  if(!hero)return;
+
+  // Inject layers
+  ['layer-bg','layer-mid','layer-fg'].forEach(cls=>{
+    const d=document.createElement('div');d.className=cls;
+    hero.insertBefore(d,hero.firstChild);
+  });
+
+  // Hero text fly-in from z-depth
+  gsap.fromTo('#ht',
+    {scale:.5,opacity:0,filter:'blur(12px)'},
+    {scale:1,opacity:1,filter:'blur(0px)',duration:1.6,ease:'power3.out',delay:.3}
+  );
+  gsap.fromTo('#hb',
+    {y:-40,opacity:0},{y:0,opacity:1,duration:1,delay:.15,ease:'power2.out'}
+  );
+  gsap.fromTo('#hs',
+    {y:40,opacity:0},{y:0,opacity:1,duration:1,delay:.7,ease:'power2.out'}
+  );
+
+  // Parallax on scroll
+  ScrollTrigger.create({
+    trigger:hero,start:'top top',end:'bottom top',
+    onUpdate(self){
+      const p=self.progress;
+      document.querySelector('.layer-bg').style.transform=`translateY(${p*80}px)`;
+      document.querySelector('.layer-mid').style.transform=`translateY(${p*160}px)`;
+      document.querySelector('.layer-fg').style.transform=`translateY(${p*240}px)`;
+      // Camera dolly: hero text floats forward then fades
+      gsap.set('#ht',{z:p*120,opacity:1-p*1.4,scale:1+p*.08});
+      gsap.set('#hs',{y:p*-30,opacity:1-p*2});
+    }
+  });
+})();
+
+// ── WARP CANVAS SPEED ON SCROLL ──────────────────────
+// Increase warp speed as hero scrolls
+ScrollTrigger.create({
+  trigger:'#hero',start:'top top',end:'+=600',
+  onUpdate(self){
+    // Signal warp to go faster (warp reads this global)
+    window._warpBoost=1+self.progress*6;
+  }
+});
+</script>
+</body>
 </body>
 </html>

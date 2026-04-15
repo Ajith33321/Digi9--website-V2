@@ -14,7 +14,7 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#030307;--bg2:#07070f;--surf:#0d0d1a;--surf2:#12122a;--p:#7c3aed;--b:#3b82f6;--c:#00d4ff;--g:#f5c842;--t:#f0eeff;--t2:#9b97c4;--t3:#5a5780;--br:rgba(124,58,237,.15);--br2:rgba(124,58,237,.3);--fh:'Syne',sans-serif;--fb:'DM Sans',sans-serif;--nav:68px}
-html{scroll-behavior:smooth}
+html{scroll-behavior:auto}
 body{font-family:var(--fb);background:var(--bg);color:var(--t);overflow-x:hidden;cursor:none}
 a{color:inherit;text-decoration:none}
 ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--p);border-radius:2px}
@@ -428,10 +428,120 @@ gsap.registerPlugin(ScrollTrigger);
 gsap.from('.hero-tag',{opacity:0,y:30,duration:1,delay:.2});
 gsap.from('.hero-title',{opacity:0,y:50,duration:1.2,delay:.4});
 gsap.from('.hero-sub',{opacity:0,y:30,duration:1,delay:.7});
-gsap.utils.toArray('.port-card').forEach((el,i)=>{
-  gsap.from(el,{scrollTrigger:{trigger:el,start:'top 85%'},opacity:0,y:50,scale:.95,duration:.8,delay:i*.07});
-});
+// original card anims replaced by tilt entry below
 gsap.from('.metric-item',{scrollTrigger:{trigger:'.metrics-grid',start:'top 80%'},opacity:0,y:30,stagger:.1,duration:.7});
+</script>
+
+<!-- Lenis smooth scroll -->
+<script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+
+<!-- 3D Effects: Z-Stack Deck Pop + Tilt Entry -->
+<style>
+/* ── DECK ───────────────────────────────────────────── */
+#deck-section{position:relative;z-index:2;padding:80px 0 120px}
+.deck-viewport{perspective:1200px;perspective-origin:50% 30%;position:relative;max-width:900px;margin:0 auto}
+.deck-stack{position:relative;height:480px;transform-style:preserve-3d}
+.deck-card-3d{position:absolute;inset:0;border-radius:24px;overflow:hidden;transition:box-shadow .3s;will-change:transform}
+.deck-card-3d .port-body{padding:36px}
+.deck-card-3d .port-img{height:240px;font-size:4rem}
+
+/* ── TILT ENTRY ─────────────────────────────────────── */
+.tilt-entry{opacity:0;transform:rotateX(45deg) scale(.75) translateY(60px);transform-origin:50% 100%;will-change:transform,opacity}
+.tilt-entry.snapped{opacity:1;transform:rotateX(0) scale(1) translateY(0)}
+</style>
+
+<script>
+// ── LENIS ────────────────────────────────────────────
+const lenis=new Lenis({lerp:.1,smoothWheel:true});
+lenis.on('scroll',ScrollTrigger.update);
+gsap.ticker.add(t=>lenis.raf(t*1000));
+gsap.ticker.lagSmoothing(0);
+
+// ── Z-AXIS DECK POP ──────────────────────────────────
+(function(){
+  const grid=document.querySelector('.port-grid');
+  if(!grid)return;
+  const cards=[...grid.querySelectorAll('.port-card')];
+  if(cards.length<2)return;
+
+  // Build deck section
+  const deckSec=document.createElement('section');
+  deckSec.id='deck-section';
+  const inner=document.createElement('div');inner.className='inner';
+  inner.innerHTML=`<div class="section-head rv" style="margin-bottom:48px"><span class="eyebrow">Featured Project</span><h2 class="stitle">Scroll to <em>Peel</em></h2></div>`;
+  const viewport=document.createElement('div');viewport.className='deck-viewport';
+  const stack=document.createElement('div');stack.className='deck-stack';
+
+  // Use first 3 cards as deck
+  const deckCards=cards.slice(0,3);
+  deckCards.forEach((card,i)=>{
+    const clone=card.cloneNode(true);
+    clone.classList.add('deck-card-3d');
+    clone.style.cssText+=`;z-index:${10-i};transform:translateY(${i*10}px) scale(${1-i*.04}) translateZ(${-i*40}px)`;
+    stack.appendChild(clone);
+  });
+  viewport.appendChild(stack);inner.appendChild(viewport);deckSec.appendChild(inner);
+
+  // Insert before portfolio section
+  const portSec=grid.closest('section')||grid.parentElement;
+  portSec.parentNode.insertBefore(deckSec,portSec);
+
+  // Pin + peel animation
+  const stackCards=[...stack.querySelectorAll('.deck-card-3d')];
+  const pinDur=stackCards.length*700;
+
+  ScrollTrigger.create({
+    trigger:deckSec,pin:true,start:'top top',end:`+=${pinDur}`,
+    onUpdate(self){
+      const prog=self.progress;
+      stackCards.forEach((card,i)=>{
+        const cardProg=Math.max(0,Math.min(1,(prog*stackCards.length)-i));
+        if(cardProg<1){
+          // resting or partially peeled
+          card.style.transform=`translateY(${i*10}px) scale(${1-i*.04}) translateZ(${-i*40}px)`;
+          card.style.opacity=1-i*.15;
+        } else {
+          // peeled off toward viewer
+          card.style.transform=`translateZ(800px) scale(1.3) translateY(-100px)`;
+          card.style.opacity=0;
+        }
+        if(i===0&&cardProg>0&&cardProg<1){
+          // top card mid-peel
+          card.style.transform=`translateZ(${cardProg*600}px) scale(${1+cardProg*.2}) translateY(${-cardProg*80}px)`;
+          card.style.opacity=1-cardProg;
+        }
+      });
+    }
+  });
+})();
+
+// ── TILT + SCALE ENTRY (45° snap flat) ───────────────
+(function(){
+  document.querySelectorAll('.port-card').forEach(card=>{
+    card.classList.add('tilt-entry');
+  });
+  gsap.utils.toArray('.tilt-entry').forEach((el,i)=>{
+    gsap.to(el,{
+      rotateX:0,scale:1,y:0,opacity:1,
+      duration:.85,ease:'back.out(1.4)',
+      transformOrigin:'50% 100%',
+      delay:i*.12,
+      scrollTrigger:{trigger:el,start:'top 85%'}
+    });
+    el.addEventListener('transitionend',()=>el.classList.add('snapped'));
+  });
+
+  // 3D tilt on hover
+  document.querySelectorAll('.port-card').forEach(card=>{
+    card.addEventListener('mousemove',e=>{
+      const r=card.getBoundingClientRect();
+      const x=(e.clientX-r.left)/r.width-.5;
+      const y=(e.clientY-r.top)/r.height-.5;
+      card.style.transform=`perspective(700px) rotateY(${x*14}deg) rotateX(${-y*14}deg) scale(1.03) translateZ(12px)`;
+    });
+    card.addEventListener('mouseleave',()=>{card.style.transform='';});
+  });
+})();
 </script>
 </body>
 </html>
