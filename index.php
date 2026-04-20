@@ -70,36 +70,58 @@ section{position:relative;z-index:2}
 .ssub{font-size:1rem;color:var(--t2);line-height:1.75;max-width:520px}
 
 /* HERO */
-#hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;padding:calc(var(--nav) + 4rem) 4vw 4rem;overflow:hidden}
-.h-badge{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:600;
-  letter-spacing:.15em;text-transform:uppercase;color:var(--c);border:1px solid rgba(0,212,255,.25);
-  padding:6px 18px;border-radius:100px;margin-bottom:2rem;background:rgba(0,212,255,.04);
-  backdrop-filter:blur(10px);opacity:0;transform:translateY(24px)}
-.h-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--c);animation:pd 2s infinite}
-h1.htitle{font-family:var(--fh);font-size:clamp(3rem,9vw,7.5rem);font-weight:800;
-  line-height:.94;letter-spacing:-.045em;margin-bottom:1.75rem;opacity:0;transform:translateY(32px)}
-.htitle .glow{background:linear-gradient(135deg,var(--p) 0%,var(--c) 100%);
+#hero{min-height:100vh;display:flex;align-items:center;
+  padding:calc(var(--nav) + 2rem) 4vw 4rem;overflow:hidden}
+.hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:55% 1fr;
+  gap:70px;align-items:center;width:100%;position:relative;z-index:2}
+.hero-left{position:relative;z-index:2}
+.h-badge{display:inline-flex;align-items:center;gap:8px;font-size:.68rem;font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--c);border:1px solid rgba(0,212,255,.22);
+  padding:5px 16px;border-radius:100px;margin-bottom:1.75rem;background:rgba(0,212,255,.04);
+  backdrop-filter:blur(10px);opacity:0;transform:translateY(-20px)}
+.h-badge::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--c);animation:pd 2s infinite;flex-shrink:0}
+h1.htitle{font-family:var(--fh);font-size:clamp(2.4rem,4.2vw,3.8rem);font-weight:700;
+  line-height:1.08;letter-spacing:-.04em;margin-bottom:1.5rem;opacity:0;transform:translateX(-50px)}
+.htitle .ht-line{display:block}
+.htitle .glow{background:linear-gradient(120deg,var(--p) 10%,var(--c) 55%,#a78bfa 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.htitle .dim{color:var(--t2)}
-.hsub{font-size:clamp(1rem,1.4vw,1.15rem);color:var(--t2);max-width:580px;line-height:1.75;
-  margin-bottom:2.75rem;opacity:0;transform:translateY(20px)}
-.hbtns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;opacity:0;transform:translateY(20px)}
-.btn-p{background:linear-gradient(135deg,var(--p),#a855f7);color:#fff;padding:15px 34px;
-  border-radius:100px;font-weight:600;font-size:.95rem;border:none;cursor:pointer;
-  box-shadow:0 0 28px rgba(124,58,237,.4);transition:all .3s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
-.btn-p:hover{transform:translateY(-2px);box-shadow:0 0 54px rgba(124,58,237,.65)}
-.btn-g{color:var(--t);padding:15px 34px;border-radius:100px;font-weight:500;font-size:.95rem;
+.htitle .plain{color:var(--t)}
+.htitle .muted{color:var(--t2);font-weight:600}
+.hsub{font-size:.975rem;color:var(--t2);max-width:460px;line-height:1.82;
+  margin-bottom:2.25rem;opacity:0;transform:translateX(-30px)}
+.hbtns{display:flex;gap:.875rem;flex-wrap:wrap;opacity:0;transform:translateY(16px)}
+.btn-p{background:linear-gradient(135deg,var(--p),#a855f7);color:#fff;padding:13px 30px;
+  border-radius:100px;font-weight:600;font-size:.9rem;border:none;cursor:pointer;
+  box-shadow:0 0 24px rgba(124,58,237,.38);transition:all .3s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 0 48px rgba(124,58,237,.62)}
+.btn-g{color:var(--t);padding:13px 30px;border-radius:100px;font-weight:500;font-size:.9rem;
   border:1px solid var(--br2);backdrop-filter:blur(10px);background:rgba(255,255,255,.03);
   transition:all .3s;text-decoration:none}
 .btn-g:hover{border-color:var(--p);background:rgba(124,58,237,.1)}
-.htags{display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center;margin-top:3rem;opacity:0;transform:translateY(20px)}
-.htag{font-size:.72rem;color:var(--t3);border:1px solid var(--br);padding:4px 14px;border-radius:100px;transition:all .25s}
-.htag:hover{color:var(--p);border-color:var(--p)}
-.hstats{display:flex;gap:3rem;flex-wrap:wrap;justify-content:center;margin-top:4.5rem;opacity:0;transform:translateY(20px);position:relative;z-index:2}
-.hstat .n{font-family:var(--fh);font-size:2.4rem;font-weight:800;
+.hstats{display:flex;gap:2.25rem;flex-wrap:wrap;margin-top:2.75rem;opacity:0;transform:translateY(16px);position:relative;z-index:2;
+  padding-top:2.25rem;border-top:1px solid var(--br)}
+.hstat .n{font-family:var(--fh);font-size:1.9rem;font-weight:700;
   background:linear-gradient(135deg,var(--t),var(--c));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
-.hstat .l{font-size:.72rem;color:var(--t3);text-transform:uppercase;letter-spacing:.1em;margin-top:4px}
+.hstat .l{font-size:.67rem;color:var(--t3);text-transform:uppercase;letter-spacing:.1em;margin-top:3px}
+/* Hero right panel */
+.hero-right{display:flex;flex-direction:column;gap:13px;position:relative;z-index:2;opacity:0}
+.hr-card{background:var(--surf);border:1px solid var(--br);border-radius:15px;padding:17px 20px;
+  display:flex;align-items:center;gap:15px;transition:all .35s;cursor:default;position:relative;overflow:hidden}
+.hr-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(124,58,237,.07),transparent);
+  opacity:0;transition:opacity .35s}
+.hr-card:hover{border-color:rgba(124,58,237,.35);background:var(--surf2)}
+.hr-card:hover::before{opacity:1}
+.hr-card:nth-child(odd){transform:translateX(20px)}
+.hr-card:hover{transform:translateX(0)!important}
+.hr-card-ico{font-size:1.4rem;width:40px;height:40px;background:rgba(124,58,237,.1);
+  border:1px solid rgba(124,58,237,.18);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.hr-card-body{flex:1;min-width:0}
+.hr-card-title{font-family:var(--fh);font-size:.88rem;font-weight:700;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hr-card-sub{font-size:.7rem;color:var(--t2);margin-top:2px}
+.hr-card-dot{width:7px;height:7px;border-radius:50%;background:var(--c);
+  margin-left:auto;animation:pd 2.4s infinite;flex-shrink:0}
+@media(max-width:900px){.hero-inner{grid-template-columns:1fr}.hero-right{display:none}}
+@media(max-width:600px){h1.htitle{font-size:clamp(2rem,8vw,2.8rem)}}
 
 /* REVEAL */
 .rv{opacity:0;transform:translateY(50px);transition:opacity .8s ease,transform .8s ease}
@@ -335,26 +357,59 @@ footer{background:var(--bg2);border-top:1px solid var(--br);padding:70px 0 36px;
 
 <!-- HERO -->
 <section id="hero">
-  <div class="h-badge" id="hb">AI &amp; Software Development &middot; Bangalore, India</div>
-  <h1 class="htitle" id="ht">
-    <span class="glow">AI Software</span><br>
-    <span class="dim">&amp; App Development</span><br>
-    <span>Company</span>
-  </h1>
-  <p class="hsub" id="hs">We build intelligent systems, automation tools, and scalable applications engineered specifically for your complex operations.</p>
-  <div class="hbtns" id="hbtn">
-    <a href="#" class="btn-p" onclick="openM(event)">Book a Consultation</a>
-    <a href="#services" class="btn-g">Explore Services &rarr;</a>
-  </div>
-  <div class="htags" id="htg">
-    <?php foreach(['AI Development','Web Apps','Mobile','Enterprise','Automation','LLM','RAG','Edge AI'] as $t): ?>
-    <span class="htag"><?= $t ?></span>
-    <?php endforeach; ?>
-  </div>
-  <div class="hstats" id="hst">
-    <?php foreach([['50+','Projects'],['8+','Years'],['30+','Clients'],['7','Industries']] as $s): ?>
-    <div class="hstat"><div class="n"><?= $s[0] ?></div><div class="l"><?= $s[1] ?></div></div>
-    <?php endforeach; ?>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="h-badge" id="hb">Bangalore, India &middot; Est. 2016</div>
+      <h1 class="htitle" id="ht">
+        <span class="ht-line muted">We Build</span>
+        <span class="ht-line glow">Intelligent</span>
+        <span class="ht-line plain">Software</span>
+      </h1>
+      <p class="hsub" id="hs">Custom AI systems, enterprise applications, and automation tools — engineered to handle your most complex operations.</p>
+      <div class="hbtns" id="hbtn">
+        <a href="#" class="btn-p" onclick="openM(event)">Book a Consultation</a>
+        <a href="#services" class="btn-g">Explore Services &rarr;</a>
+      </div>
+      <div class="hstats" id="hst">
+        <?php foreach([['50+','Projects'],['8+','Years'],['30+','Clients'],['7','Industries']] as $s): ?>
+        <div class="hstat"><div class="n"><?= $s[0] ?></div><div class="l"><?= $s[1] ?></div></div>
+        <?php endforeach; ?>
+      </div>
+    </div>
+    <div class="hero-right" id="hr">
+      <div class="hr-card">
+        <div class="hr-card-ico">🤖</div>
+        <div class="hr-card-body">
+          <div class="hr-card-title">AI Development</div>
+          <div class="hr-card-sub">LLMs &middot; RAG &middot; Fine-tuning &middot; Agents</div>
+        </div>
+        <div class="hr-card-dot"></div>
+      </div>
+      <div class="hr-card">
+        <div class="hr-card-ico">💻</div>
+        <div class="hr-card-body">
+          <div class="hr-card-title">Web Applications</div>
+          <div class="hr-card-sub">React &middot; Next.js &middot; Node &middot; Dashboards</div>
+        </div>
+        <div class="hr-card-dot"></div>
+      </div>
+      <div class="hr-card">
+        <div class="hr-card-ico">📱</div>
+        <div class="hr-card-body">
+          <div class="hr-card-title">Mobile Apps</div>
+          <div class="hr-card-sub">Flutter &middot; Native iOS &middot; Android</div>
+        </div>
+        <div class="hr-card-dot"></div>
+      </div>
+      <div class="hr-card">
+        <div class="hr-card-ico">⚡</div>
+        <div class="hr-card-body">
+          <div class="hr-card-title">Automation & Integration</div>
+          <div class="hr-card-sub">Workflows &middot; APIs &middot; Legacy Systems</div>
+        </div>
+        <div class="hr-card-dot"></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -708,16 +763,7 @@ document.querySelectorAll('a,button,.mchip,.fq-q,.sv-card,.wk-card,.wc,.in-item'
   draw();
 })();
 
-/* ── HERO ENTRANCE ── */
-(function(){
-  const els=[['#hb',.15],['#ht',.3],['#hs',.5],['#hbtn',.65],['#htg',.8],['#hst',.95]];
-  els.forEach(([id,delay])=>{
-    setTimeout(()=>{
-      const el=document.querySelector(id);
-      if(el){el.style.transition='opacity .8s ease, transform .8s ease';el.style.opacity='1';el.style.transform='translateY(0)'}
-    },delay*1000);
-  });
-})();
+/* ── HERO ENTRANCE (handled by GSAP below) ── */
 
 /* ── SCROLL REVEALS ── */
 const ro=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:.12});
@@ -904,16 +950,32 @@ gsap.ticker.lagSmoothing(0);
     hero.insertBefore(d,hero.firstChild);
   });
 
-  // Hero text fly-in from z-depth
-  gsap.fromTo('#ht',
-    {scale:.5,opacity:0,filter:'blur(12px)'},
-    {scale:1,opacity:1,filter:'blur(0px)',duration:1.6,ease:'power3.out',delay:.3}
-  );
+  // Hero text entrance — slide in from left
   gsap.fromTo('#hb',
-    {y:-40,opacity:0},{y:0,opacity:1,duration:1,delay:.15,ease:'power2.out'}
+    {y:-28,opacity:0},{y:0,opacity:1,duration:.8,delay:.15,ease:'power2.out'}
+  );
+  gsap.fromTo('#ht',
+    {x:-60,opacity:0,filter:'blur(6px)'},
+    {x:0,opacity:1,filter:'blur(0px)',duration:1.1,ease:'power3.out',delay:.35}
   );
   gsap.fromTo('#hs',
-    {y:40,opacity:0},{y:0,opacity:1,duration:1,delay:.7,ease:'power2.out'}
+    {x:-40,opacity:0},{x:0,opacity:1,duration:.95,delay:.65,ease:'power2.out'}
+  );
+  gsap.fromTo('#hbtn',
+    {y:18,opacity:0},{y:0,opacity:1,duration:.8,delay:.9,ease:'power2.out'}
+  );
+  gsap.fromTo('#hst',
+    {y:18,opacity:0},{y:0,opacity:1,duration:.8,delay:1.1,ease:'power2.out'}
+  );
+  // Right cards stagger in from right
+  gsap.to('#hr',{opacity:1,duration:0,delay:.5});
+  gsap.fromTo('#hr .hr-card',
+    {x:70,opacity:0},
+    {x:0,opacity:1,duration:.85,ease:'power3.out',stagger:.13,delay:.55,
+     onComplete:()=>{
+       // restore odd offset after entrance
+       document.querySelectorAll('.hr-card:nth-child(odd)').forEach(c=>c.style.transform='translateX(20px)');
+     }}
   );
 
   // Parallax on scroll
@@ -924,9 +986,9 @@ gsap.ticker.lagSmoothing(0);
       document.querySelector('.layer-bg').style.transform=`translateY(${p*80}px)`;
       document.querySelector('.layer-mid').style.transform=`translateY(${p*160}px)`;
       document.querySelector('.layer-fg').style.transform=`translateY(${p*240}px)`;
-      // Camera dolly: hero text floats forward then fades
-      gsap.set('#ht',{z:p*120,opacity:1-p*1.4,scale:1+p*.08});
-      gsap.set('#hs',{y:p*-30,opacity:1-p*2});
+      // Fade out left content as user scrolls past hero
+      gsap.set('#ht',{opacity:1-p*1.8,y:p*-20});
+      gsap.set('#hs',{opacity:1-p*2.2,y:p*-15});
     }
   });
 })();
