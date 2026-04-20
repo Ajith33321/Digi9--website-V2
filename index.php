@@ -769,28 +769,24 @@ if(typeof gsap!=='undefined'){
     });
   });
 
-  /* Stats — 3D Slot Machine Drum Roll */
+  /* Stats — slide up + counter */
   gsap.utils.toArray('.sn').forEach((el,i)=>{
-    // Wrap in drum container
-    const parent=el.parentElement;
-    const drum=document.createElement('div');
-    drum.style.cssText='overflow:hidden;height:1.15em;perspective:300px;display:block';
-    el.style.cssText+='display:block;transform-origin:50% 50% -20px;will-change:transform,opacity';
-    parent.insertBefore(drum,el);
-    drum.appendChild(el);
-
+    const finalVal=parseInt(el.dataset.n)||0;
+    const suffix=el.dataset.s||'';
+    // Start hidden below
+    gsap.set(el,{opacity:0,y:30});
     ScrollTrigger.create({trigger:'#stats',start:'top 80%',once:true,onEnter:()=>{
-      // 3D roll-in
-      gsap.fromTo(el,
-        {rotateX:90,opacity:0,y:'100%'},
-        {rotateX:0,opacity:1,y:0,duration:.9,delay:i*.18,ease:'back.out(1.6)',
-         onStart:()=>{
-           let c=0,t=parseInt(el.dataset.n),sf=el.dataset.s||'';
-           const step=Math.ceil(t/60);
-           const timer=setInterval(()=>{c=Math.min(c+step,t);el.textContent=c+sf;if(c>=t)clearInterval(timer)},22);
-         }
-        }
-      );
+      // Animate number up
+      gsap.to(el,{opacity:1,y:0,duration:.7,delay:i*.18,ease:'power3.out'});
+      setTimeout(()=>{
+        let c=0;
+        const step=Math.ceil(finalVal/55);
+        const timer=setInterval(()=>{
+          c=Math.min(c+step,finalVal);
+          el.textContent=c+suffix;
+          if(c>=finalVal)clearInterval(timer);
+        },20);
+      },i*180);
     }});
   });
 
