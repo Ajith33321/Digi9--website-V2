@@ -103,23 +103,9 @@ h1.htitle{font-family:var(--fh);font-size:clamp(2.4rem,4.2vw,3.8rem);font-weight
 .hstat .n{font-family:var(--fh);font-size:1.9rem;font-weight:700;
   background:linear-gradient(135deg,var(--t),var(--c));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
 .hstat .l{font-size:.67rem;color:var(--t3);text-transform:uppercase;letter-spacing:.1em;margin-top:3px}
-/* Hero right panel */
-.hero-right{display:flex;flex-direction:column;gap:13px;position:relative;z-index:2;opacity:0}
-.hr-card{background:var(--surf);border:1px solid var(--br);border-radius:15px;padding:17px 20px;
-  display:flex;align-items:center;gap:15px;transition:all .35s;cursor:default;position:relative;overflow:hidden}
-.hr-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(124,58,237,.07),transparent);
-  opacity:0;transition:opacity .35s}
-.hr-card:hover{border-color:rgba(124,58,237,.35);background:var(--surf2)}
-.hr-card:hover::before{opacity:1}
-.hr-card:nth-child(odd){transform:translateX(20px)}
-.hr-card:hover{transform:translateX(0)!important}
-.hr-card-ico{font-size:1.4rem;width:40px;height:40px;background:rgba(124,58,237,.1);
-  border:1px solid rgba(124,58,237,.18);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.hr-card-body{flex:1;min-width:0}
-.hr-card-title{font-family:var(--fh);font-size:.88rem;font-weight:700;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hr-card-sub{font-size:.7rem;color:var(--t2);margin-top:2px}
-.hr-card-dot{width:7px;height:7px;border-radius:50%;background:var(--c);
-  margin-left:auto;animation:pd 2.4s infinite;flex-shrink:0}
+/* Hero right panel — orbital */
+.hero-right{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;opacity:0}
+#orbit-canvas{width:100%;max-width:420px;aspect-ratio:1;display:block}
 @media(max-width:900px){.hero-inner{grid-template-columns:1fr}.hero-right{display:none}}
 @media(max-width:600px){h1.htitle{font-size:clamp(2rem,8vw,2.8rem)}}
 
@@ -377,38 +363,7 @@ footer{background:var(--bg2);border-top:1px solid var(--br);padding:70px 0 36px;
       </div>
     </div>
     <div class="hero-right" id="hr">
-      <div class="hr-card">
-        <div class="hr-card-ico">🤖</div>
-        <div class="hr-card-body">
-          <div class="hr-card-title">AI Development</div>
-          <div class="hr-card-sub">LLMs &middot; RAG &middot; Fine-tuning &middot; Agents</div>
-        </div>
-        <div class="hr-card-dot"></div>
-      </div>
-      <div class="hr-card">
-        <div class="hr-card-ico">💻</div>
-        <div class="hr-card-body">
-          <div class="hr-card-title">Web Applications</div>
-          <div class="hr-card-sub">React &middot; Next.js &middot; Node &middot; Dashboards</div>
-        </div>
-        <div class="hr-card-dot"></div>
-      </div>
-      <div class="hr-card">
-        <div class="hr-card-ico">📱</div>
-        <div class="hr-card-body">
-          <div class="hr-card-title">Mobile Apps</div>
-          <div class="hr-card-sub">Flutter &middot; Native iOS &middot; Android</div>
-        </div>
-        <div class="hr-card-dot"></div>
-      </div>
-      <div class="hr-card">
-        <div class="hr-card-ico">⚡</div>
-        <div class="hr-card-body">
-          <div class="hr-card-title">Automation & Integration</div>
-          <div class="hr-card-sub">Workflows &middot; APIs &middot; Legacy Systems</div>
-        </div>
-        <div class="hr-card-dot"></div>
-      </div>
+      <canvas id="orbit-canvas"></canvas>
     </div>
   </div>
 </section>
@@ -967,16 +922,8 @@ gsap.ticker.lagSmoothing(0);
   gsap.fromTo('#hst',
     {y:18,opacity:0},{y:0,opacity:1,duration:.8,delay:1.1,ease:'power2.out'}
   );
-  // Right cards stagger in from right
-  gsap.to('#hr',{opacity:1,duration:0,delay:.5});
-  gsap.fromTo('#hr .hr-card',
-    {x:70,opacity:0},
-    {x:0,opacity:1,duration:.85,ease:'power3.out',stagger:.13,delay:.55,
-     onComplete:()=>{
-       // restore odd offset after entrance
-       document.querySelectorAll('.hr-card:nth-child(odd)').forEach(c=>c.style.transform='translateX(20px)');
-     }}
-  );
+  // Orbital canvas fade in
+  gsap.to('#hr',{opacity:1,duration:1.2,delay:.7,ease:'power2.out'});
 
   // Parallax on scroll
   ScrollTrigger.create({
@@ -991,6 +938,143 @@ gsap.ticker.lagSmoothing(0);
       gsap.set('#hs',{opacity:1-p*2.2,y:p*-15});
     }
   });
+})();
+
+// ── ORBITAL CANVAS ────────────────────────────────────
+(function(){
+  const cv=document.getElementById('orbit-canvas');
+  if(!cv)return;
+  const ctx=cv.getContext('2d');
+  let S=0,cx=0,cy=0,t=0;
+
+  function resize(){
+    const r=cv.getBoundingClientRect();
+    S=Math.min(r.width,r.height)*window.devicePixelRatio||400;
+    cv.width=S;cv.height=S;
+    cx=S/2;cy=S/2;
+  }
+  resize();
+  window.addEventListener('resize',resize);
+
+  const rings=[
+    {r:.28,speed:.38,color:'rgba(124,58,237,.55)',dots:[
+      {emoji:'🤖',label:'AI',angle:0},
+      {emoji:'🧠',label:'ML',angle:Math.PI}
+    ]},
+    {r:.42,speed:.22,color:'rgba(0,212,255,.45)',dots:[
+      {emoji:'💻',label:'Web',angle:.5},
+      {emoji:'📱',label:'Mobile',angle:.5+Math.PI},
+      {emoji:'🏢',label:'SaaS',angle:.5+Math.PI*.6}
+    ]},
+    {r:.56,speed:.13,color:'rgba(168,85,247,.38)',dots:[
+      {emoji:'⚡',label:'Auto',angle:1.2},
+      {emoji:'🔗',label:'API',angle:1.2+Math.PI*.7},
+      {emoji:'📊',label:'Data',angle:1.2+Math.PI*1.4}
+    ]}
+  ];
+
+  // particle sparks on each ring
+  const sparks=rings.map(rg=>{
+    const arr=[];
+    for(let i=0;i<22;i++)arr.push({a:Math.random()*Math.PI*2,size:Math.random()*1.5+.4,alpha:Math.random()*.6+.2,speed:(Math.random()-.5)*.002});
+    return arr;
+  });
+
+  function draw(){
+    ctx.clearRect(0,0,S,S);
+    t+=.008;
+
+    // outer glow halo
+    const halo=ctx.createRadialGradient(cx,cy,S*.04,cx,cy,S*.58);
+    halo.addColorStop(0,'rgba(124,58,237,.14)');
+    halo.addColorStop(.5,'rgba(0,212,255,.05)');
+    halo.addColorStop(1,'transparent');
+    ctx.fillStyle=halo;ctx.beginPath();ctx.arc(cx,cy,S*.58,0,Math.PI*2);ctx.fill();
+
+    // rings + sparks
+    rings.forEach((rg,ri)=>{
+      const R=rg.r*S;
+      // dashed ring
+      ctx.save();
+      ctx.strokeStyle=rg.color;
+      ctx.lineWidth=Math.max(1,S*.0012);
+      ctx.setLineDash([Math.max(2,S*.008),Math.max(4,S*.018)]);
+      ctx.beginPath();ctx.arc(cx,cy,R,0,Math.PI*2);ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.restore();
+
+      // ring spark particles
+      sparks[ri].forEach(sp=>{
+        sp.a+=sp.speed+rg.speed*.005;
+        const x=cx+Math.cos(sp.a)*R;
+        const y=cy+Math.sin(sp.a)*R;
+        ctx.beginPath();ctx.arc(x,y,sp.size,0,Math.PI*2);
+        ctx.fillStyle=rg.color.replace(/[\d.]+\)$/,`${sp.alpha})`);
+        ctx.fill();
+      });
+
+      // orbiting dots
+      rg.dots.forEach(d=>{
+        const a=d.angle+t*rg.speed;
+        const x=cx+Math.cos(a)*R;
+        const y=cy+Math.sin(a)*R;
+        const dotR=Math.max(14,S*.036);
+
+        // glow
+        const g=ctx.createRadialGradient(x,y,0,x,y,dotR*2.2);
+        g.addColorStop(0,rg.color.replace(/[\d.]+\)$/,'.5)'));
+        g.addColorStop(1,'transparent');
+        ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,dotR*2.2,0,Math.PI*2);ctx.fill();
+
+        // dot bg
+        ctx.beginPath();ctx.arc(x,y,dotR,0,Math.PI*2);
+        ctx.fillStyle='rgba(10,10,22,.92)';ctx.fill();
+        ctx.strokeStyle=rg.color;ctx.lineWidth=Math.max(1,S*.002);ctx.stroke();
+
+        // emoji
+        ctx.font=`${Math.max(10,dotR*.9)}px serif`;
+        ctx.textAlign='center';ctx.textBaseline='middle';
+        ctx.fillText(d.emoji,x,y);
+
+        // label
+        ctx.font=`${Math.max(7,S*.018)}px 'DM Sans',sans-serif`;
+        ctx.fillStyle='rgba(240,238,255,.7)';
+        ctx.fillText(d.label,x,y+dotR+Math.max(8,S*.018));
+      });
+    });
+
+    // core
+    const coreR=S*.07;
+    const cg=ctx.createRadialGradient(cx,cy,0,cx,cy,coreR*2.5);
+    cg.addColorStop(0,'rgba(168,85,247,1)');
+    cg.addColorStop(.35,'rgba(124,58,237,.85)');
+    cg.addColorStop(.7,'rgba(0,212,255,.25)');
+    cg.addColorStop(1,'transparent');
+    ctx.fillStyle=cg;ctx.beginPath();ctx.arc(cx,cy,coreR*2.5,0,Math.PI*2);ctx.fill();
+
+    // core circle
+    ctx.beginPath();ctx.arc(cx,cy,coreR,0,Math.PI*2);
+    ctx.fillStyle='rgba(10,10,22,.92)';ctx.fill();
+    ctx.strokeStyle='rgba(168,85,247,.9)';ctx.lineWidth=Math.max(1.5,S*.003);ctx.stroke();
+
+    // core text
+    ctx.font=`bold ${Math.max(11,S*.028)}px 'Syne',sans-serif`;
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillStyle='#f0eeff';
+    ctx.fillText('AI',cx,cy-S*.012);
+    ctx.font=`${Math.max(7,S*.016)}px 'DM Sans',sans-serif`;
+    ctx.fillStyle='rgba(0,212,255,.8)';
+    ctx.fillText('CORE',cx,cy+S*.022);
+
+    // core pulse ring
+    const pulse=(Math.sin(t*2)*.5+.5);
+    ctx.beginPath();ctx.arc(cx,cy,coreR*(1.3+pulse*.35),0,Math.PI*2);
+    ctx.strokeStyle=`rgba(0,212,255,${.15+pulse*.2})`;
+    ctx.lineWidth=Math.max(1,S*.0015);ctx.stroke();
+
+    requestAnimationFrame(draw);
+  }
+  draw();
 })();
 
 // ── WARP CANVAS SPEED ON SCROLL ──────────────────────
