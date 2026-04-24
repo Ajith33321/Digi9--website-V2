@@ -276,9 +276,10 @@ footer{background:var(--bg2);border-top:1px solid var(--br);padding:70px 0 36px;
 .modal-bg.open{display:flex}
 .modal-box{background:var(--surf);border:1px solid var(--br2);border-radius:22px;width:100%;max-width:500px;padding:44px;position:relative;max-height:90vh;overflow-y:auto;animation:mop .35s cubic-bezier(.34,1.56,.64,1)}
 @keyframes mop{from{opacity:0;transform:scale(.9) translateY(18px)}to{opacity:1;transform:none}}
-.modal-x{position:absolute;top:18px;right:18px;width:30px;height:30px;background:var(--surf2);border:1px solid var(--br);color:var(--t2);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:all .2s}
+.modal-x{position:absolute;top:18px;right:18px;width:30px;height:30px;background:var(--surf2);border:1px solid var(--br);color:var(--t2);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:all .2s;z-index:2}
 .modal-x:hover{border-color:var(--p);color:var(--t)}
-.mst{display:none}.mst.act{display:block}
+.mst{display:none;position:relative;z-index:1}.mst.act{display:block}
+#mc{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;border-radius:22px;z-index:0;opacity:.65}
 .mt{font-family:var(--fh);font-size:1.5rem;font-weight:800;letter-spacing:-.03em;margin-bottom:8px}
 .ms{color:var(--t2);font-size:.88rem;margin-bottom:28px;line-height:1.55}
 .mpg{display:flex;gap:7px;margin-bottom:28px}
@@ -583,6 +584,7 @@ footer{background:var(--bg2);border-top:1px solid var(--br);padding:70px 0 36px;
 <!-- MODAL -->
 <div class="modal-bg" id="mbg" onclick="closeBg(event)">
   <div class="modal-box">
+    <canvas id="mc"></canvas>
     <button class="modal-x" onclick="closeM()">&#x2715;</button>
     <div class="mst act" id="ms1">
       <div style="font-size:2.4rem;margin-bottom:14px">🚀</div>
@@ -824,8 +826,166 @@ function faq(btn){
   if(!open)item.classList.add('open');
 }
 
+/* ── MODAL CANVAS ── */
+(function(){
+  const cv=document.getElementById('mc');
+  const ctx=cv.getContext('2d');
+  let W=400,H=500,mx=200,my=250,step=1;
+  let parts=[],bursts=[],sparks=[],streams=[],orb={t:0};
+
+  function sz(){
+    const r=cv.parentElement.getBoundingClientRect();
+    if(r.width>0){W=cv.width=Math.round(r.width);H=cv.height=Math.round(r.height);}
+  }
+  window._mcResize=sz;
+
+  cv.parentElement.addEventListener('mousemove',e=>{
+    const r=cv.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top;
+  });
+
+  /* Step 1 — constellation */
+  function ip1(){
+    sz();parts=[];
+    const cols=['rgba(124,58,237,','rgba(0,212,255,','rgba(168,85,247,'];
+    for(let i=0;i<60;i++)parts.push({
+      x:Math.random()*W,y:Math.random()*H,
+      vx:(Math.random()-.5)*.45,vy:(Math.random()-.5)*.45,
+      r:Math.random()*2+.4,al:Math.random()*.55+.15,c:cols[i%3]
+    });
+  }
+  function dp1(){
+    ctx.clearRect(0,0,W,H);
+    const g=ctx.createRadialGradient(mx,my,0,mx,my,140);
+    g.addColorStop(0,'rgba(124,58,237,.1)');g.addColorStop(1,'transparent');
+    ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+    parts.forEach((p,i)=>{
+      const dx=mx-p.x,dy=my-p.y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<170){p.vx+=dx*.00028;p.vy+=dy*.00028;}
+      p.x+=p.vx;p.y+=p.vy;p.vx*=.985;p.vy*=.985;
+      if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;
+      parts.forEach((q,j)=>{
+        if(j<=i)return;
+        const dd=Math.hypot(p.x-q.x,p.y-q.y);
+        if(dd<90){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);
+          ctx.strokeStyle=`rgba(124,58,237,${.13*(1-dd/90)})`;ctx.lineWidth=.5;ctx.stroke();}
+      });
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=p.c+p.al+')';ctx.fill();
+    });
+  }
+
+  /* Step 2 — data rain */
+  function ip2(){
+    sz();streams=[];
+    const chars=['01','10','AI','ML','{}','</>','fn','λ','//'];
+    for(let i=0;i<10;i++)streams.push({
+      x:15+i*(W/10),
+      drops:Array.from({length:7},()=>({y:Math.random()*H,sp:Math.random()*1.1+.4,al:Math.random()*.38+.07})),
+      ch:chars[i%chars.length]
+    });
+  }
+  function dp2(){
+    ctx.clearRect(0,0,W,H);
+    ctx.font='9px monospace';ctx.textAlign='center';
+    streams.forEach(s=>s.drops.forEach(d=>{
+      ctx.fillStyle=`rgba(0,212,255,${d.al})`;
+      ctx.fillText(s.ch,s.x,d.y);
+      d.y+=d.sp;if(d.y>H){d.y=-12;d.al=Math.random()*.38+.07;}
+    }));
+  }
+
+  /* Step 3 — chip particle burst */
+  function addBurst(x,y){
+    const cols=['rgba(124,58,237','rgba(0,212,255','rgba(168,85,247','rgba(245,200,66'];
+    for(let i=0;i<24;i++){
+      const a=(i/24)*Math.PI*2,sp=Math.random()*4+1;
+      bursts.push({x,y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,al:1,r:Math.random()*3+.8,c:cols[i%4]});
+    }
+  }
+  function dp3(){
+    ctx.clearRect(0,0,W,H);
+    bursts=bursts.filter(b=>b.al>.03);
+    bursts.forEach(b=>{
+      b.x+=b.vx;b.y+=b.vy;b.vy+=.07;b.al*=.93;
+      ctx.beginPath();ctx.arc(b.x,b.y,b.r,0,Math.PI*2);
+      ctx.fillStyle=b.c+`,${b.al})`;ctx.fill();
+    });
+  }
+
+  /* Step 4 — orbiting checkmarks */
+  function dp4(){
+    ctx.clearRect(0,0,W,H);
+    orb.t+=.014;
+    const ox=W/2,oy=72,rx=68,ry=18;
+    ctx.beginPath();ctx.ellipse(ox,oy,rx,ry,0,0,Math.PI*2);
+    ctx.strokeStyle='rgba(124,58,237,.18)';ctx.lineWidth=1;ctx.stroke();
+    ['✓','★','✦'].forEach((ch,i)=>{
+      const a=orb.t+i*(Math.PI*2/3);
+      const x=ox+Math.cos(a)*rx,y=oy+Math.sin(a)*ry;
+      const pulse=.45+Math.sin(orb.t*1.8+i)*.22;
+      ctx.font=`bold ${11+Math.sin(orb.t+i)*2}px sans-serif`;
+      ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillStyle=`rgba(124,58,237,${pulse})`;
+      ctx.fillText(ch,x,y);
+      // trail glow
+      const tg=ctx.createRadialGradient(x,y,0,x,y,14);
+      tg.addColorStop(0,`rgba(124,58,237,${pulse*.35})`);tg.addColorStop(1,'transparent');
+      ctx.fillStyle=tg;ctx.beginPath();ctx.arc(x,y,14,0,Math.PI*2);ctx.fill();
+    });
+  }
+
+  /* Step 5 — fireworks */
+  function launch(){
+    sparks=[];
+    const cols=['rgba(124,58,237','rgba(0,212,255','rgba(168,85,247','rgba(245,200,66'];
+    for(let i=0;i<100;i++){
+      const a=Math.random()*Math.PI*2,sp=Math.random()*7+2;
+      sparks.push({x:W/2,y:H*.35,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,al:1,r:Math.random()*3+.8,c:cols[i%4]});
+    }
+    setTimeout(()=>{
+      for(let i=0;i<55;i++){
+        const a=Math.random()*Math.PI*2,sp=Math.random()*5+1;
+        sparks.push({x:W*.25,y:H*.4,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,al:1,r:Math.random()*2+.5,c:cols[i%4]});
+        sparks.push({x:W*.75,y:H*.4,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,al:1,r:Math.random()*2+.5,c:cols[(i+2)%4]});
+      }
+    },500);
+  }
+  function dp5(){
+    ctx.clearRect(0,0,W,H);
+    sparks.forEach(s=>{s.x+=s.vx;s.y+=s.vy;s.vy+=.1;s.al*=.962;
+      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle=s.c+`,${s.al})`;ctx.fill();
+    });
+    sparks=sparks.filter(s=>s.al>.025);
+  }
+
+  const dfs=[null,dp1,dp2,dp3,dp4,dp5];
+  function loop(){if(dfs[step])dfs[step]();requestAnimationFrame(loop);}
+
+  window.setModalStep=function(n){
+    step=n;
+    if(n===1)ip1();
+    else if(n===2){sz();ip2();}
+    else if(n===3){sz();bursts=[];}
+    else if(n===4)sz();
+    else if(n===5){sz();launch();}
+  };
+
+  /* Chip burst on click */
+  document.querySelectorAll('.mchip').forEach(chip=>{
+    chip.addEventListener('click',()=>{
+      if(step!==3)return;
+      const cr=cv.getBoundingClientRect();
+      const br=chip.getBoundingClientRect();
+      addBurst(br.left+br.width/2-cr.left, br.top+br.height/2-cr.top);
+    });
+  });
+
+  sz();ip1();loop();
+})();
+
 /* ── MODAL ── */
-function openM(e){if(e)e.preventDefault();document.getElementById('mbg').classList.add('open');document.body.style.overflow='hidden';mgo(1)}
+function openM(e){if(e)e.preventDefault();document.getElementById('mbg').classList.add('open');document.body.style.overflow='hidden';mgo(1);setTimeout(()=>{if(window._mcResize)_mcResize();},40)}
 function closeM(){document.getElementById('mbg').classList.remove('open');document.body.style.overflow=''}
 function closeBg(e){if(e.target===document.getElementById('mbg'))closeM()}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeM()});
@@ -833,6 +993,7 @@ function mgo(n){
   document.querySelectorAll('.mst').forEach(s=>s.classList.remove('act'));
   const s=document.getElementById('ms'+n);if(s)s.classList.add('act');
   if(n===4)msum();
+  if(window.setModalStep)setModalStep(n);
 }
 function mv2(){
   const n=document.getElementById('mn').value.trim(),e=document.getElementById('me').value.trim();
